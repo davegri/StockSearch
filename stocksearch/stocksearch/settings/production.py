@@ -14,3 +14,6 @@ DATABASES = {
     }
 }
 
+
+STATIC_ROOT = os.path.dirname(BASE_DIR)
+STATIC_URL = '/static/'
