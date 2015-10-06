@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/search.css" %}">
+{% endblock head %}
+
+
+{% block body %}
+<header class="top-header">
+<div class="top-container">
+    <h1 class="logo"><a href="{% url 'home' %}">Stock<strong>Search</strong></a></h1>
+    </div>
+</header>
+<ul class="photos">
+<h2>duplicates:</h2>
+{% for set in duplicates  %}
+  <a href="{{ set.0.page_url }}"><img src="{{set.0.thumbnail.url}}" alt="{{ set.0.hash }}"></a>
+  <a href="{{ set.1.page_url }}"><img src="{{set.1.thumbnail.url}}" alt="{{ set.1.hash }}"></a>
+  <br>
+{% endfor %}
+</ul>
+{% endblock body %}
+
+

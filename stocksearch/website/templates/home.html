@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
+{% endblock head %}
+
+{% block body %}
+
+<header class="main-header">
+    <h1 class="logo"><a href="{% url 'home' %}">Stock<strong>Me</strong>Up</a></h1>
+    <h2 class="tagline">search through thousands of high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
+    <form action='/search' method="GET" id="search-form">
+        <div class="search-box"><input type="text" name="query" placeholder="e.g: silly face"></div>
+        <div class="checkboxes">
+        {% for origin in origins  %}
+          <input type="checkbox" name="origin" value="{{ origin.0 }}" checked> {{ origin.1 }}
+          {% if forloop.counter|divisibleby:7 %}<br />{% endif %}
+        {% endfor %}
+        </div>
+        <input type="submit" class="main-button" value="Find Photos">
+    </form>
+</header>
+<div class="popular-tags">
+<h3>Popular tags</h3>
+    {% for tag in tags  %}
+        <a href='/search/?query={{tag}}'>#{{ tag }}</a>
+    {% endfor %}
+</div>
+<ul class="photos">
+    {% include "_images.html" %}
+</ul>
+<div class="sk-circle" id="preloader">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src={% static "js/infinite_scrolling.js" %}></script>
+{% endblock body %}

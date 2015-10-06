@@ -1,0 +1,46 @@
+
+.top-container{
+    max-width:95vw;
+    margin: 0 auto;
+}
+
+
+.top-header{
+    width: 100%;
+    text-align: center;
+    input[type="text"]{
+        padding: 0.7rem;
+        height:50px;
+        width:20%;
+    }
+    input[type="submit"]{
+        padding: 0.7rem 1.4em;
+        height:50px;
+        vertical-align: top;
+        font-size: 1rem;
+    }
+    form{
+        text-align: left;
+    }
+    .logo{
+        margin: 0;
+        position: absolute;
+        top:90px;
+        right:50%;
+        transform: translate(50%, 0);
+
+    }
+}
+
+.checkboxes{
+    text-align: left;
+    margin-top: 1rem;
+    input{
+        margin-top: 0.8rem;
+    }
+}
+
+h2{
+    font-weight: normal;
+    margin-top: 5rem;
+}

@@ -1,0 +1,11 @@
+media/
+.sass-cache/
+*.css.map
+__pycache__/
+*.py[cod]
+*~
+**/*~
+# Django stuff:
+*.log
+*.pot
+.fuse_hidden*

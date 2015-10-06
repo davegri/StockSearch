@@ -1,0 +1,35 @@
+
+.main-header{
+    text-align: center;
+    .tagline{
+        font-weight: normal;
+    }
+    .search-box{
+        font-size: 1.5rem;
+        input{
+            padding: 1rem;
+            width:65%;
+        }
+    }
+    .checkboxes{
+        margin-top: 2rem;
+        input{
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+    }
+    input[type="submit"]{
+        margin-top: 2rem;
+    }
+}
+
+.popular-tags{
+    margin-top: 4rem;
+    text-align: center;
+    a{
+        margin-left: 1rem;
+    }
+}
+
+
+

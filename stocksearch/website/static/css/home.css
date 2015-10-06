@@ -1,0 +1,24 @@
+.main-header {
+  text-align: center; }
+  .main-header .tagline {
+    font-weight: normal; }
+  .main-header .search-box {
+    font-size: 1.5rem; }
+    .main-header .search-box input {
+      padding: 1rem;
+      width: 65%; }
+  .main-header .checkboxes {
+    margin-top: 2rem; }
+    .main-header .checkboxes input {
+      margin-left: 1rem;
+      margin-top: 1rem; }
+  .main-header input[type="submit"] {
+    margin-top: 2rem; }
+
+.popular-tags {
+  margin-top: 4rem;
+  text-align: center; }
+  .popular-tags a {
+    margin-left: 1rem; }
+
+/*# sourceMappingURL=home.css.map */
