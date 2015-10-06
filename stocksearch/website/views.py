@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.db.models import Count
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import Http404, JsonResponse
-from haystack.generic_views import SearchView
 from time import sleep;
 import operator
 import re
