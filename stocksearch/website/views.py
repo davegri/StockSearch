@@ -13,6 +13,7 @@ import watson
 import distance
 import pdb
 
+@ensure_csrf_cookie
 def home(request):
     per_page = 15
     page_num = 1
@@ -23,7 +24,7 @@ def home(request):
     return render(request, 'home.html', context_dict)
 
 
-
+@ensure_csrf_cookie
 def search(request):
     all_origins = Image._meta.get_field('origin').choices
     all_origins = [origin[0] for origin in all_origins]
