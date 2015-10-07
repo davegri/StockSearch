@@ -45,7 +45,7 @@ $.ajaxSetup({
         bindEvents: function(){
             $(document).on('scroll', function(){
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                    //this.getImages();
+                    this.getImages();
                 }
             }.bind(this));
 
