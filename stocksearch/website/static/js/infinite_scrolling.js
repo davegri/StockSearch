@@ -29,24 +29,31 @@ $.ajaxSetup({
 });
 
 
-(function(){
+(function (){
     $('#preloader').hide()
     var Gallery = {
         page: 1,
         init: function(){
-            this.bindEvents();
             this.cacheDOM();
+            this.bindEvents();
         },
         cacheDOM: function(){
-            this.$image_ul = $('ul.photos')
-            this.$form = $('#search-form')
+            this.$image_ul = $('ul.photos');
+            this.$form = $('#search-form');
+            this.$more_button = $('.load-more');
         },
         bindEvents: function(){
             $(document).on('scroll', function(){
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                    this.getImages();
+                    //this.getImages();
                 }
             }.bind(this));
+
+            this.$more_button.on('click', function(){
+                this.$more_button.remove()
+                this.getImages();
+            }.bind(this));
+
             $(document).ajaxStart(function(){
                 $('#preloader').show()
             });   
@@ -59,6 +66,7 @@ $.ajaxSetup({
         },
         appendImages: function(html){
             this.$image_ul.append(html);
+            this.$image_ul.after('<button class="main-button load-more">Load more results</button>')
         },
         getImages: function(){
             this.incrementPage();
@@ -68,10 +76,11 @@ $.ajaxSetup({
                 url : "/images/",
                 type : "POST",
                 data : data, 
-
                 success : function(html) {
                     console.log("success");
                     this.appendImages(html);
+                    this.cacheDOM();                    
+                    this.bindEvents();
                 }.bind(this),
 
                 error : function(xhr,errmsg,err) {

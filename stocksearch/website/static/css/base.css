@@ -198,6 +198,10 @@ li:hover .overlay {
     border: 3px solid grey;
     padding: 0.5em 1em; }
 
+.load-more {
+  display: block;
+  margin: 0 auto; }
+
 .sk-circle {
   margin: 2rem auto;
   width: 40px;
