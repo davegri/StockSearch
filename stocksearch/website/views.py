@@ -12,6 +12,7 @@ import re
 import watson
 import distance
 import pdb
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 @ensure_csrf_cookie
 def home(request):
