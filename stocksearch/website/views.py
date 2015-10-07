@@ -18,7 +18,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 def home(request):
     per_page = 20
     page_num = 1
-    images = Image.objects.all().order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
+    images = Image.objects.all().exclude(tags__isnull=True).order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     tags = Tag.objects.all().annotate(num_times=Count('image')).order_by('-num_times')[:10]
     origins = Image._meta.get_field('origin').choices
     context_dict = {'images':images,'tags':tags,'origins':origins}
@@ -88,7 +88,7 @@ def get_images_ajax(request):
 
 def get_images_paginated(query, origins, page_num):
     args = None
-    queryset = Image.objects.all()
+    queryset = Image.objects.all().exclude(tags__isnull=True)
     per_page = 20
     page_num = int(page_num)
     if origins:
