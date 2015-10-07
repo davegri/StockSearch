@@ -1,7 +1,12 @@
 {% spaceless %}
 {% for image in images  %}
-    <li>
+    <li class="image">
     <img src="{{ image.thumbnail.url }}" >
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
     <div class="overlay">
         <a href="{{ image.page_url}} " target="_blank" class="button">
         Download <span class="origin">at <strong>{{image.get_origin_display}}</strong></span>
@@ -12,7 +17,13 @@
             {% endfor %}
         </ul>
     </div>
-    </a>
     </li>
 {% endfor %}
 {% endspaceless %}
+<script>
+$("img").one("load", function() {
+  $(this).parent().find('.spinner').hide();
+}).each(function() {
+  if(this.complete) $(this).load();
+});
+</script>

@@ -27,5 +27,12 @@
 {% block body %}
 {% endblock body %}
 </div>
+<script>
+$("img").one("load", function() {
+  $(this).parent().find('.spinner').hide();
+}).each(function() {
+  if(this.complete) $(this).load();
+});
+</script>
 </body>
 </html>
