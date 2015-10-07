@@ -254,12 +254,12 @@ class Crawler():
             print(RED.format("thumbnail creation failed, deleting image"))
             self.images_failed+=1
             return False
-
+            
         hash = image.create_hash()
         print(BLUE.format('hash created: {}'.format(hash)))
 
         print('checking if duplicate of existing image')
-        existing = Image.objects.extra(where=['hamming_text(hash,%s)>0.9'], params=[hash]).exclude(pk=image.pk)
+        existing = Image.objects.exclude(pk=image.pk).exclude(hash__isnull=True).exclude(hash__exact='').extra(where=['hamming_text(hash,%s)>0.9'], params=[hash])
         if existing:
             print('image is a duplicate of {} added tags to existing image and moving on'.format(existing[0].page_url))
             for tag in tags:
