@@ -29,7 +29,7 @@ class Image(models.Model):
     thumbnail = models.ImageField(upload_to='thumbs', null=True)
     origin = models.CharField(choices=origins, max_length=2)
     tags = models.ManyToManyField(Tag)
-    hash = models.CharField(max_length=576, unique=True)
+    hash = models.CharField(max_length=576)
 
     def __str__(self):
         return self.page_url
