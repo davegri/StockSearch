@@ -81,13 +81,23 @@ input[type="text"] {
       .photos > li {
         margin-left: 1%;
         float: left;
+        width: 100%; }
+        .photos > li:nth-of-type(1n+1) {
+          margin-left: 0;
+          clear: both; }
+        .photos > li:nth-of-type(n+2) {
+          margin-top: 1%; } }
+    @media screen and (min-width: 750px) and (max-width: 1000px) {
+      .photos > li {
+        margin-left: 1%;
+        float: left;
         width: 49.5%; }
         .photos > li:nth-of-type(2n+1) {
           margin-left: 0;
           clear: both; }
         .photos > li:nth-of-type(n+3) {
           margin-top: 1%; } }
-    @media screen and (min-width: 750px) and (max-width: 1000px) {
+    @media screen and (min-width: 1000px) and (max-width: 1250px) {
       .photos > li {
         margin-left: 1%;
         float: left;
@@ -97,7 +107,7 @@ input[type="text"] {
           clear: both; }
         .photos > li:nth-of-type(n+4) {
           margin-top: 1%; } }
-    @media screen and (min-width: 1000px) and (max-width: 1250px) {
+    @media screen and (min-width: 1250px) {
       .photos > li {
         margin-left: 1%;
         float: left;
@@ -106,16 +116,6 @@ input[type="text"] {
           margin-left: 0;
           clear: both; }
         .photos > li:nth-of-type(n+5) {
-          margin-top: 1%; } }
-    @media screen and (min-width: 1250px) {
-      .photos > li {
-        margin-left: 1%;
-        float: left;
-        width: 19.2%; }
-        .photos > li:nth-of-type(5n+1) {
-          margin-left: 0;
-          clear: both; }
-        .photos > li:nth-of-type(n+6) {
           margin-top: 1%; } }
 
 .overlay {

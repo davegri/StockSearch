@@ -137,16 +137,16 @@ input[type="text"]{
                 border-radius: 3px;
             }
             @media screen and(max-width:750px){
-              @include part_of(2,1%);
+              @include part_of(1,1%);
             }
             @media screen and(min-width:750px) and (max-width: 1000px){
-              @include part_of(3,1%);
+              @include part_of(2,1%);
             }
             @media screen and(min-width:1000px) and (max-width: 1250px){
-              @include part_of(4,1%);
+              @include part_of(3,1%);
             }
             @media screen and(min-width:1250px){
-              @include part_of(5,1%);
+              @include part_of(4,1%);
             }
     }
 }
