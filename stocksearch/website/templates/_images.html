@@ -4,9 +4,8 @@
     <img src="{{ image.thumbnail.url }}" >
     <div class="overlay">
         <a href="{{ image.page_url}} " target="_blank" class="button">
-        Download at <strong>{{image.get_origin_display}}</strong>
+        Download <span class="origin">at <strong>{{image.get_origin_display}}</strong></span>
         </a><br>
-
         <ul class="tags">
             {% for tag in image.tags.all|slice:':10' %}
                 <li><a href='/search/?query={{tag}}'>{{ tag }}</a></li>

@@ -10,6 +10,8 @@ $blue: #4d90fe;
 $primary_color: $blue;
 $secondary_color: $orange;
 
+$break-large: 1200px;
+
 @mixin part_of($num, $gutter_percent: $gutter_percent){
         margin-left: $gutter_percent;
         float: left;
@@ -60,7 +62,7 @@ body{
 }
 
 .container{
-    padding-top: 3%;
+    padding: 3%;
     max-width: 95vw;
     margin: 0 auto;
 }
@@ -70,8 +72,13 @@ h1{
     font-size: 2.2rem;
 }
 
-    .logo{
-                a{
+h1,h2{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+    h1.logo{
+            a{
             font-weight: normal;
             text-decoration: none;
             color: inherit;
@@ -113,6 +120,10 @@ input[type="text"]{
     }
 }
 
+.checkboxes{
+
+}
+
 .photos{
     @include clearfix();
     margin-top: 2rem;
@@ -120,13 +131,23 @@ input[type="text"]{
     >li{
         display:inline;
         position: relative;
-            @include part_of(5,1%);
             img{
             max-height:100%;
                 max-width:100%;
                 border-radius: 3px;
             }
-
+            @media screen and(max-width:750px){
+              @include part_of(2,1%);
+            }
+            @media screen and(min-width:750px) and (max-width: 1000px){
+              @include part_of(3,1%);
+            }
+            @media screen and(min-width:1000px) and (max-width: 1250px){
+              @include part_of(4,1%);
+            }
+            @media screen and(min-width:1250px){
+              @include part_of(5,1%);
+            }
     }
 }
 
@@ -159,6 +180,11 @@ input[type="text"]{
         background-color: white;
         color:black;
       }
+      .origin{
+        @media screen and (max-width: 900px) {
+          display:none;
+        }
+      }
     }
 }
 
@@ -183,6 +209,9 @@ li:hover .overlay{
       text-decoration: underline;
     }
   }
+    @media screen and (max-width: 700px) {
+          display:none;
+   }
 }
 
 

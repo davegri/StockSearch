@@ -8,17 +8,15 @@
 {% block body %}
 <header class="top-header">
 <div class="top-container">
+    <h1 class="logo"><a href="{% url 'home' %}">Libre<strong>Stock</strong></a></h1>
     <form id="search-form">
+        <div class="search-box">
         <input type="text" name="query" value="{{query}}">
         <input type="submit" class="main-button" value="Find Photos">
-        <div class="checkboxes">
-        {% for origin in all_origins  %}
-          <input type="checkbox" name="origin" value="{{ origin.0 }}" {% if origin.0 in origins_checked %}checked {% endif %} > {{ origin.1 }}
-          {% if forloop.counter|divisibleby:5 %}<br />{% endif %}
-        {% endfor %}
         </div>
+        <div></div>
     </form>
-    <h1 class="logo"><a href="{% url 'home' %}">Libre<strong>Stock</strong></a></h1>
+
     </div>
 </header>
 <ul class="photos">

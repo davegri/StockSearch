@@ -6,12 +6,16 @@
     font-size: 1.5rem; }
     .main-header .search-box input {
       padding: 1rem;
-      width: 65%; }
+      width: 100%;
+      max-width: 770px; }
   .main-header .checkboxes {
     margin-top: 2rem; }
     .main-header .checkboxes input {
       margin-left: 1rem;
       margin-top: 1rem; }
+    @media screen and (max-width: 888px) {
+      .main-header .checkboxes {
+        display: none; } }
   .main-header input[type="submit"] {
     margin-top: 2rem; }
 
