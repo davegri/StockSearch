@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+#BASE is where manage.py is located
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -90,21 +90,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'stocksearch.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'stocksearch_db',
-        'USER': 'david',
-        'PASSWORD': 'david',
-        'HOST': '',
-        'PORT': '',
-    }
-}
 
 
 # Internationalization
