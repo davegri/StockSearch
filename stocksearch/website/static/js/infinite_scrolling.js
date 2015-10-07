@@ -36,6 +36,7 @@ $.ajaxSetup({
         init: function(){
             this.cacheDOM();
             this.bindEvents();
+            this.busy = false
         },
         cacheDOM: function(){
             this.$image_ul = $('ul.photos');
@@ -44,14 +45,15 @@ $.ajaxSetup({
         },
         bindEvents: function(){
             $(document).on('scroll', function(){
-                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                    this.$more_button.remove()
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight & (!this.busy)) {
+                    this.busy = true
+                    this.$more_button.hide()
                     this.getImages();
                 }
             }.bind(this));
 
             this.$more_button.on('click', function(){
-                this.$more_button.remove()
+                this.$more_button.hide()
                 this.getImages();
             }.bind(this));
 
@@ -60,13 +62,15 @@ $.ajaxSetup({
             });   
              $(document).ajaxStop(function(){
                 $('#preloader').hide()
-            });   
+                this.busy = false
+            }.bind(this));   
         },
         incrementPage: function(){
             this.page +=1;
         },
         appendImages: function(html){
             this.$image_ul.append(html);
+            this.$more_button.remove()
             this.$image_ul.after('<button class="main-button load-more">Load more results</button>')
         },
         getImages: function(){
