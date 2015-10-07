@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django_extensions',
     'crawlers',
     'website',
-    'debug_toolbar',
     'watson'
 )
 
