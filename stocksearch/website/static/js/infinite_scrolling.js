@@ -78,7 +78,9 @@ $.ajaxSetup({
             this.incrementPage();
             data = this.$form.serializeArray();
             data.push({'name':'page', 'value':this.page});
-            data.push({'name':'last_id', 'value':last_id});
+            if (typeof last_id !== 'undefined'){
+                data.push({'name':'last_id', 'value':last_id});
+            }
             $.ajax({
                 url : "/images/",
                 type : "POST",
