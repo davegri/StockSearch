@@ -17,8 +17,10 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import redirect
 
 import math
+from django.views.decorators.cache import cache_page
 
 @ensure_csrf_cookie
+@cache_page(60 * 60)
 def home(request):
     per_page = 20
     page_num = 1
