@@ -132,7 +132,7 @@ class Crawler():
                     image_page_urls = self.get_image_page_urls(current_page_soup)
                     for n,image_page_url in enumerate(image_page_urls):
                         print('crawling image at: {} (image {} of {})'.format(image_page_url, n+1, len(image_page_urls)))
-                        if Image.objects.filter(page_url__contains=self.strip_protocol(image_page_url)).exists():
+                        if Image.objects.filter(page_url__icontains=self.strip_protocol(image_page_url)).exists():
                             print("Image already exists in database, moving on")
                             if not full_crawl:
                                 self.terminate_message()
@@ -188,7 +188,7 @@ class Crawler():
         if image_page_url is None:
             image_page_url = image_source_url    
         # check if page url exists
-        if Image.objects.filter(page_url=image_page_url).exists():
+        if Image.objects.filter(page_url__icontains=self.strip_protocol(image_page_url)).exists():
             print("Image already exists in database, moving on")
             raise ImageAlreadyExists
 

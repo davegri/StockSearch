@@ -25,7 +25,8 @@ def home(request):
     images = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     tags = Tag.objects.all().annotate(num_times=Count('image')).order_by('-num_times')[:10]
     origins = Image._meta.get_field('origin').choices
-    context_dict = {'images':images,'tags':tags,'origins':origins}
+    last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
+    context_dict = {'images':images,'tags':tags,'origins':origins,'last_id':last_id}
     return render(request, 'home.html', context_dict)
 
 
@@ -87,8 +88,9 @@ def get_images_ajax(request):
     query = request.POST.get('query')
     origins = request.POST.getlist('origin')
     page_num = request.POST.get('page')
+    last_id = request.POST.get('last_id', None)
 
-    images, amount = get_images_paginated(query, origins, page_num)
+    images, amount = get_images_paginated(query, origins, page_num, last_id)
     pages = int(math.ceil(amount / 20))
     if int(page_num) >= pages:
         last_page = True;
@@ -102,9 +104,11 @@ def get_images_ajax(request):
     return render(request, '_images.html', context)
 
 
-def get_images_paginated(query, origins, page_num):
+def get_images_paginated(query, origins, page_num, last_id=None):
     args = None
     queryset = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True)
+    if last_id is not None:
+        queryset = queryset.filter(id__lt=last_id)
     per_page = 20
     page_num = int(page_num)
     if origins:

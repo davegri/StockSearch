@@ -47,5 +47,9 @@
   <div class="sk-circle12 sk-child"></div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src={% static "js/infinite_scrolling.js" %}></script>
+<script type="text/javascript">
+var last_id = "{{ last_id }}";
+</script>
+<script type="text/javascript" src={% static "js/infinite_scrolling.js" %}>
+</script>
 {% endblock body %}
