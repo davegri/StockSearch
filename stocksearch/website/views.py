@@ -38,9 +38,9 @@ def search(request):
 
     pages = int(math.ceil(amount / 20))
     if page >= pages:
-        last_page = True;
+        last_page = True
     else:
-        last_page = False;
+        last_page = False
 
     if query.isdigit():
         comparison_image = Image.objects.get(pk=int(query))
