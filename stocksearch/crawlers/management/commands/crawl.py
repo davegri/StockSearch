@@ -148,11 +148,11 @@ class PixabayCrawler(Crawler):
         return tag_container
 
 class PixabayunsplashCrawler(Crawler):
-    origin = 'PB'
+    origin = 'PBU'
     base_url = 'https://pixabay.com/en/users/Unsplash-242387/?tab=latest&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
-        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+        Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
         containers = page_soup.find_all('div', class_='item')
