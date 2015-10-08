@@ -74,6 +74,7 @@ $.ajaxSetup({
             this.$image_ul.after('<button class="main-button load-more">Load more results</button>')
         },
         getImages: function(){
+            if (!last_page){
             this.incrementPage();
             data = this.$form.serializeArray();
             data.push({'name':'page', 'value':this.page});
@@ -86,6 +87,9 @@ $.ajaxSetup({
                     this.appendImages(html);
                     this.cacheDOM();                    
                     this.bindEvents();
+                    if (last_page){
+                        $('.load-more').hide();
+                    }
                 }.bind(this),
 
                 error : function(xhr,errmsg,err) {
@@ -93,10 +97,12 @@ $.ajaxSetup({
                 }.bind(this)
             });
         }
-
+        }
     };
     Gallery.init();
 })()
+
+
 
 
 

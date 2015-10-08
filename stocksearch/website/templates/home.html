@@ -29,7 +29,9 @@
 <ul class="photos">
 {% include "_images.html" %}
 </ul>
-<button class="main-button load-more">Load more results</button>
+{% if not last_page %}
+  <button class="main-button load-more">Load more results</button>
+{% endif %}
 <div class="sk-circle" id="preloader">
   <div class="sk-circle1 sk-child"></div>
   <div class="sk-circle2 sk-child"></div>

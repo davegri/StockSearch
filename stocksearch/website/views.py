@@ -13,6 +13,7 @@ import watson
 import distance
 import pdb
 from django.views.decorators.csrf import ensure_csrf_cookie
+import math
 
 @ensure_csrf_cookie
 def home(request):
@@ -34,7 +35,13 @@ def search(request):
     page = request.GET.get('page', 1)
 
     images, amount = get_images_paginated(query, origins_checked, page)
-    distances = None
+
+    pages = int(math.ceil(amount / 20))
+    if page >= pages:
+        last_page = True;
+    else:
+        last_page = False;
+
     if query.isdigit():
         comparison_image = Image.objects.get(pk=int(query))
 
@@ -52,6 +59,7 @@ def search(request):
                     'origins_checked': origins_checked,
                     'images': images,
                     'params': queries_without_page,
+                    'last_page': last_page
                     }
     return render(request, 'search.html', context_dict)
 
@@ -78,9 +86,14 @@ def get_images_ajax(request):
     page_num = request.POST.get('page')
 
     images, amount = get_images_paginated(query, origins, page_num)
-
+    pages = int(math.ceil(amount / 20))
+    if int(page_num) >= pages:
+        last_page = True;
+    else:
+        last_page = False;
     context = {
         'images':images,
+        'last_page':last_page,
     }
 
     return render(request, '_images.html', context)
@@ -104,7 +117,10 @@ def get_images_paginated(query, origins, page_num):
         amount = len(images)
         return images, amount
 
-    images = watson.filter(queryset, query).order_by('-id')
+    if query:
+        images = watson.filter(queryset, query)
+    else:
+        images = watson.filter(queryset, query).order_by('-id')
     amount = images.count()
     images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
 

@@ -20,8 +20,14 @@
     </li>
 {% endfor %}
 {% endspaceless %}
-
 <script>
+var last_page
+if ("{{ last_page }}" == "True"){
+  last_page = true;
+}
+else{
+  last_page = false;
+}
 $("img").one("load", function() {
   $(this).parent().find('.spinner').hide();
 }).each(function() {
