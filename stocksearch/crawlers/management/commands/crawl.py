@@ -334,7 +334,7 @@ class Command(BaseCommand):
         parser.add_argument('origin', nargs='*')
 
     def handle(self, *args, **options):
-        crawler_classes = [MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+        crawler_classes = [MmtCrawler, JaymantriCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                            PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                            LittlevisualsCrawler, StocksnapCrawler]
         if options['origin']:

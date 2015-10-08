@@ -11,6 +11,11 @@
         <a href="{{ image.page_url}} " target="_blank" class="button">
         Download <span class="origin">at <strong>{{image.get_origin_display}}</strong></span>
         </a><br>
+        {% if user.is_staff %}
+        <a href="{% url 'hide' image.id %}" class="button">
+        Hide
+        </a><br>
+        {% endif %}
         <ul class="tags">
             {% for tag in image.tags.all|slice:':10' %}
                 <li><a href='/search/?query={{tag}}'>{{ tag }}</a></li>

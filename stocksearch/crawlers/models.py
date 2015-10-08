@@ -30,6 +30,7 @@ class Image(models.Model):
     origin = models.CharField(choices=origins, max_length=2)
     tags = models.ManyToManyField(Tag)
     hash = models.CharField(max_length=576)
+    hidden = models.BooleanField(default=False)
 
     def __str__(self):
         return self.page_url

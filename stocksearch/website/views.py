@@ -13,13 +13,16 @@ import watson
 import distance
 import pdb
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import redirect
+
 import math
 
 @ensure_csrf_cookie
 def home(request):
     per_page = 20
     page_num = 1
-    images = Image.objects.all().exclude(tags__isnull=True).order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
+    images = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     tags = Tag.objects.all().annotate(num_times=Count('image')).order_by('-num_times')[:10]
     origins = Image._meta.get_field('origin').choices
     context_dict = {'images':images,'tags':tags,'origins':origins}
@@ -101,13 +104,13 @@ def get_images_ajax(request):
 
 def get_images_paginated(query, origins, page_num):
     args = None
-    queryset = Image.objects.all().exclude(tags__isnull=True)
+    queryset = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True)
     per_page = 20
     page_num = int(page_num)
     if origins:
         origins = [Q(origin=origin) for origin in origins]
         args = reduce(operator.or_, origins)
-        queryset = Image.objects.filter(args)        
+        queryset = queryset.filter(args)        
 
     if query.isdigit():
         pk = int(query)
@@ -126,3 +129,9 @@ def get_images_paginated(query, origins, page_num):
 
     return images, amount
 
+@staff_member_required
+def hide(request, id):
+    image = Image.objects.get(pk=id)
+    image.hidden = True
+    image.save()
+    return redirect('home')
