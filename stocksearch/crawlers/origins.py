@@ -11,5 +11,7 @@ origins = (
         ('LV', 'Littlevisuals'),
         ('SP', 'SKITTERPHOTO'),
         ('JM', 'JayMantri'),
-        ('MT','MMT')
+        ('MT','MMT'),
+        ('FN','FreeNatureStock')
+
 )

@@ -313,9 +313,30 @@ class MmtCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('ul', class_='post-categories')
 
+class FreenaturestockCrawler(Crawler):
+    origin = 'FN'
+    base_url = 'http://freenaturestock.com/page/{}'
+    domain = 'freenaturestock.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('article', class_='type-photo')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img')['data-highres']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img')['src']
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find('input', class_='short-url-field')['value']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
 
 def getClass(str):
-    crawler_classes = [MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+    crawler_classes = [FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                    LittlevisualsCrawler, StocksnapCrawler]
     for crawler_class in crawler_classes:
@@ -334,7 +355,7 @@ class Command(BaseCommand):
         parser.add_argument('origin', nargs='*')
 
     def handle(self, *args, **options):
-        crawler_classes = [MmtCrawler, JaymantriCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+        crawler_classes = [FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                            PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                            LittlevisualsCrawler, StocksnapCrawler]
         if options['origin']:
