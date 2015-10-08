@@ -158,8 +158,8 @@ class Crawler():
                                 return
 
                 self.current_page+=1
-                self.db_record.current_page+=1
-                self.db_record.save()
+                if self.current_page == 500:
+                    raise HTTPError
 
 
         # run out of pages
@@ -254,7 +254,7 @@ class Crawler():
             print(RED.format("thumbnail creation failed, deleting image"))
             self.images_failed+=1
             return False
-            
+
         hash = image.create_hash()
         print(BLUE.format('hash created: {}'.format(hash)))
 
