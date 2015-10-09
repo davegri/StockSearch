@@ -65,7 +65,8 @@ def search(request):
                     'origins_checked': origins_checked,
                     'images': images,
                     'params': queries_without_page,
-                    'last_page': last_page
+                    'last_page': last_page,
+                    'last_id': last_id
                     }
     return render(request, 'search.html', context_dict)
 
