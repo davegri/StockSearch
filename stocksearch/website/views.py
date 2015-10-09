@@ -39,8 +39,8 @@ def search(request):
     query = request.GET.get('query', False)
     origins_checked = request.GET.getlist('origin') or all_origins
     page = request.GET.get('page', 1)
-
-    images, amount = get_images_paginated(query, origins_checked, page)
+    last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
+    images, amount = get_images_paginated(query, origins_checked, page, last_id)
 
     pages = int(math.ceil(amount / 20))
     if page >= pages:
