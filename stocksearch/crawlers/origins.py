@@ -12,6 +12,8 @@ origins = (
         ('SP', 'SKITTERPHOTO'),
         ('JM', 'JayMantri'),
         ('MT','MMT'),
-        ('FN','FreeNatureStock')
-
+        ('FN','FreeNatureStock'),
+        ('BA','BARA ART'),
+        ('FP','Freely Photos'),
+        ('BI','Barn Images')
 )

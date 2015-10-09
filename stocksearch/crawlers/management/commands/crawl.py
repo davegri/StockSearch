@@ -335,10 +335,74 @@ class FreenaturestockCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
 
-def getClass(str):
-    crawler_classes = [FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+class BaraartCrawler(Crawler):
+    origin = 'BA'
+    base_url = 'http://www.bara-art.com/photos/page/{}/'
+    domain = 'www.bara-art.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='blog-thumb')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('span', class_='tags')
+
+class FreelyphotosCrawler(Crawler):
+    origin = 'FP'
+    base_url = 'http://freelyphotos.com/'
+    domain = 'www.freelyphotos.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='post-container')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='post-content').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='wrapper').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('li', class_='post-tags') 
+
+class BarnimagesCrawler(Crawler):
+    origin = 'BI'
+    base_url = 'http://barnimages.com/page/{}'
+    domain = 'www.barnimages.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='post-img')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', class_='download-link')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='post-entry').find('img')['src']
+
+    def get_tags(self, image_page_soup):
+        tags = image_page_soup.find_all('meta', {'property':'article:tag'})
+        return [tag['content'] for tag in tags]
+
+
+
+crawler_classes = [BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                    LittlevisualsCrawler, StocksnapCrawler]
+
+def getClass(str):
     for crawler_class in crawler_classes:
         if str == crawler_class.origin:
             return crawler_class
@@ -355,9 +419,7 @@ class Command(BaseCommand):
         parser.add_argument('origin', nargs='*')
 
     def handle(self, *args, **options):
-        crawler_classes = [FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
-                           PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
-                           LittlevisualsCrawler, StocksnapCrawler]
+        global crawler_classes
         if options['origin']:
             crawler_classes = [getClass(origin) for origin in options['origin']]
         crawlers = [crawler_class() for crawler_class in crawler_classes]
