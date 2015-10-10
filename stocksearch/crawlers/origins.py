@@ -15,5 +15,8 @@ origins = (
         ('FN','FreeNatureStock'),
         ('BA','BARA ART'),
         ('FP','Freely Photos'),
-        ('BI','Barn Images')
+        ('BI','Barn Images'),
+        ('GS','GoodStockPhotos'),
+        ('FP','Finda Photo')             
+
 )

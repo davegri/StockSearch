@@ -396,9 +396,77 @@ class BarnimagesCrawler(Crawler):
         tags = image_page_soup.find_all('meta', {'property':'article:tag'})
         return [tag['content'] for tag in tags]
 
+class GoodstockphotosCrawler(Crawler):
+    origin = 'GS'
+    base_url = 'https://goodstock.photos/page/{}/'
+    domain = 'www.goodstock.photos'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='entry-content')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', class_='button')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return "http://"+image_page_soup.find('div', class_='entry-content').find('img')['src'].replace("//","")
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('span', class_='entry-tags') 
+
+class FreeuseCrawler(Crawler):
+    origin = 'FU'
+    base_url = 'http://freeuse.io/browse/{}'
+    domain = 'www.freeuse.io'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='image-details')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', text='Download')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('div', class_='image-holder').find('img')['ng-src'])
+
+    def get_tags_container(self, image_page_soup):
+
+        return image_page_soup.find('h4', text='Tags').parent()
 
 
-crawler_classes = [BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+class FindaphotoCrawler(Crawler):
+    origin = 'FP'
+    base_url = 'http://finda.photo/search?q=&page={}'
+    domain = 'www.finda.photo/'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_urls(self, page_soup):
+        """
+        returns a list of urls for each image on the page
+        """
+        image_page_links_containers = page_soup.find_all('div', class_="box")
+        image_page_links = [link.find('a') for link in image_page_links_containers]
+        if not image_page_links: raise ImageURLsNotFound
+        image_page_urls = [ link['href'].replace('..', '') for link in image_page_links]
+        # make sure urls are absolute
+        image_page_urls = [self.make_absolute_url(url) for url in image_page_urls]
+        return image_page_urls
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('a', class_='download-button')['href'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('div', class_='image-detail-image-container').find('img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='image-detail-tags') 
+
+crawler_classes = [FindaphotoCrawler, GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                    LittlevisualsCrawler, StocksnapCrawler]
 
