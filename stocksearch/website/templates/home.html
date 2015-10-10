@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+ {% load humanize %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
 {% endblock head %}
@@ -7,7 +8,7 @@
 {% block body %}
 <header class="main-header">
     <h1 class="logo"><a href="{% url 'home' %}">Libre<strong>Stock</strong></a></h1>
-    <h2 class="tagline">search through <strong>{{total_image_count}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
+    <h2 class="tagline">search through <strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
     <form action='/search' method="GET" id="search-form">
         <div class="search-box"><input type="text" name="query" placeholder="eg: cute puppies"></div>
         <div class="checkboxes">
