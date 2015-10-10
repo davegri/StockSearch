@@ -19,10 +19,14 @@
 
     </div>
 </header>
+{%  if not results_amount %}
+<h2>Nothing found for <strong>{{ query }}</strong></h2>
+{% else %}
 <h2>{{ results_amount }} Results for <strong>{{ query }}</strong>:</h2>
 <ul class="photos">
 {% include "_images.html" %}
 </ul>
+{% endif %}
 {% if not last_page %}
   <button class="main-button load-more">Load more results</button>
 {% endif %}
