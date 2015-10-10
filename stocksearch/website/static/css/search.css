@@ -1,13 +1,16 @@
 .container {
-  padding-top: 6%; }
+  padding-top: 4%; }
   @media screen and (max-width: 645px) {
     .container {
-      padding-top: 35%; } }
+      padding-top: 38%; } }
 
 .top-container {
-  padding: 3%;
+  padding: 2%;
   max-width: 95vw;
   margin: 0 auto; }
+  @media screen and (max-width: 645px) {
+    .top-container {
+      padding: 5%; } }
   .top-container:after {
     clear: both;
     content: ".";
@@ -53,14 +56,14 @@
     color: white;
     position: relative;
     margin: 0;
-    float: right;
+    float: left;
     height: 100%; }
     @media screen and (max-width: 645px) {
       .top-header .logo {
         float: none;
         margin-bottom: 1rem; } }
   .top-header form {
-    text-align: left;
+    text-align: right;
     overflow: hidden;
     height: 100%;
     position: relative; }

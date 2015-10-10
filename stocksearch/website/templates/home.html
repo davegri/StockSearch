@@ -12,7 +12,13 @@
         <div class="search-box"><input type="text" name="query" placeholder="e.g: ocean sunset"></div>
         <div class="checkboxes">
         {% for origin in origins  %}
-          <input type="checkbox" name="origin" value="{{ origin.0 }}" checked> {{ origin.1 }}
+          <input type="checkbox" id="{{origin.0}}-checkbox" name="origin" value="{{ origin.0 }}" checked> 
+              <label for="{{origin.0}}-checkbox">
+                  <span class="circle"></span>
+                  <span class="check"></span>
+                  <span class="box"></span>
+                  {{ origin.1 }}
+              </label> 
           {% if forloop.counter|divisibleby:7 %}<br />{% endif %}
         {% endfor %}
         </div>
