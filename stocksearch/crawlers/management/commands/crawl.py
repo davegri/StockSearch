@@ -169,6 +169,28 @@ class PixabayunsplashCrawler(Crawler):
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
         return tag_container
 
+class PixabayfoundryCrawler(Crawler):
+    origin = 'PBF'
+    base_url = 'https://pixabay.com/en/users/Foundry-923783/?tab=latest&pagi={}'
+    domain = 'www.pixabay.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='item')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        tag_container = image_page_soup.find('h1')
+        [tag.extract() for tag in tag_container.find_all('a', class_='award')]
+        return tag_container        
+
 class SkitterphotoCrawler(Crawler):
     origin = 'SP'
     base_url = 'http://skitterphoto.com/?page_id=13&paged={}'
@@ -416,27 +438,6 @@ class GoodstockphotosCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', class_='entry-tags') 
 
-class FreeuseCrawler(Crawler):
-    origin = 'FU'
-    base_url = 'http://freeuse.io/browse/{}'
-    domain = 'www.freeuse.io'
-    def __init__(self, db_record=None):
-        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
-
-    def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('div', class_='image-details')
-        return [container.find('a') for container in containers]
-
-    def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', text='Download')['href']
-
-    def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('div', class_='image-holder').find('img')['ng-src'])
-
-    def get_tags_container(self, image_page_soup):
-
-        return image_page_soup.find('h4', text='Tags').parent()
-
 
 class FindaphotoCrawler(Crawler):
     origin = 'FP'
@@ -466,7 +467,7 @@ class FindaphotoCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='image-detail-tags') 
 
-crawler_classes = [FindaphotoCrawler, GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
+crawler_classes = [PixabayfoundryCrawler, FindaphotoCrawler, GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                    LittlevisualsCrawler, StocksnapCrawler]
 
