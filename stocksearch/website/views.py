@@ -28,7 +28,16 @@ def home(request):
     tags = Tag.objects.all().annotate(num_times=Count('image')).order_by('-num_times')[:10]
     origins = Image._meta.get_field('origin').choices
     last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
-    context_dict = {'images':images,'tags':tags,'origins':origins,'last_id':last_id}
+    total_image_count = Image.objects.all().count()
+
+    context_dict = {
+    'images':images,
+    'tags':tags,
+    'origins':origins,
+    'last_id':last_id,
+    'total_image_count': total_image_count
+    }
+
     return render(request, 'home.html', context_dict)
 
 
