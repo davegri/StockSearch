@@ -63,8 +63,7 @@ input[type="text"] {
 
 .photos {
   margin-top: 2rem;
-  padding: 0;
-  margin: 0; }
+  padding: 0; }
   .photos:after {
     clear: both;
     content: ".";
