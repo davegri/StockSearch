@@ -467,6 +467,9 @@ class FindaphotoCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='image-detail-tags') 
 
+
+
+
 crawler_classes = [PixabayfoundryCrawler, FindaphotoCrawler, GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler, FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler, PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler, FancycraveCrawler,
                    LittlevisualsCrawler, StocksnapCrawler]
