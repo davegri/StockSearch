@@ -17,6 +17,7 @@ origins = (
         ('FP','Freely Photos'),
         ('BI','Barn Images'),
         ('GS','GoodStockPhotos'),
-        ('FP','Finda Photo')             
+        ('FP','Finda Photo')  ,           
+        ('PG','Picography')             
 
 )

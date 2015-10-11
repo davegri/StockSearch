@@ -511,10 +511,27 @@ class FindaphotoCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='image-detail-tags') 
 
+class PicographyCrawler(Crawler):
+    origin = 'PG'
+    base_url = 'http://picography.co/page/{}/'
+    domain = 'picography.co/'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        return page_soup.find_all('a', class_='overlay')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', text='Download')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='photoBox').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('ul', class_='hd-labels') 
 
 
-
-crawler_classes = [PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+crawler_classes = [PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
