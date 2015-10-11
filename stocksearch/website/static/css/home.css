@@ -1,3 +1,9 @@
+.container {
+  padding-top: 5%; }
+  @media screen and (max-width: 683px) {
+    .container {
+      padding-top: 15%; } }
+
 .main-header {
   text-align: center; }
   .main-header .tagline {
@@ -24,5 +30,17 @@
   text-align: center; }
   .popular-tags a {
     margin-left: 1rem; }
+
+.message {
+  color: white;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #4d90fe;
+  text-align: center;
+  padding: 1em; }
+  .message a {
+    color: white; }
 
 /*# sourceMappingURL=home.css.map */

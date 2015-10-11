@@ -1,4 +1,13 @@
 
+.container{
+    padding-top: 5%;
+                @media screen and (max-width: 683px) {
+    padding-top: 15%;
+
+        }
+}
+
+
 .main-header{
     text-align: center;
     .tagline{
@@ -33,6 +42,21 @@
     text-align: center;
     a{
         margin-left: 1rem;
+    }
+}
+
+
+.message{
+    color:white;
+    position: absolute;
+    width:100%;
+    left:0;
+    top:0;
+    background-color: #4d90fe;
+    text-align: center;
+    padding: 1em;
+    a{
+        color:white;
     }
 }
 
