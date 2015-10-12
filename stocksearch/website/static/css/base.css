@@ -37,15 +37,15 @@ h1.logo a {
 
 .main-button {
   border-radius: 3px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  background-color: white;
-  color: #4d90fe;
-  border: 1px solid #4d90fe;
+  background-color: #4d90fe;
+  color: white;
+  border: 2px solid #4d90fe;
   padding: 0.3em 1em;
   transition: background-color 0.2s ease; }
   .main-button:hover {
-    background-color: #4d90fe;
+    background-color: #66a0fe;
     color: white;
     cursor: pointer; }
   .main-button:focus {
@@ -61,8 +61,19 @@ input[type="text"] {
     box-shadow: none;
     outline: none; }
 
+.share {
+  font-size: 0.9rem;
+  border-radius: 3px;
+  color: white;
+  background-color: grey;
+  padding: 0.7em 1.2em;
+  margin: 1em 0em 1em 0em;
+  float: right; }
+  .share:hover {
+    text-decoration: none; }
+
 .photos {
-  margin-top: 2rem;
+  margin-top: 3rem;
   padding: 0; }
   .photos:after {
     clear: both;
@@ -210,6 +221,14 @@ li:hover .overlay {
   display: block;
   margin: 0 auto; }
 
+@-moz-document url-prefix() {
+  /* hide the system icon for loading images */
+  img:-moz-loading {
+    visibility: hidden; }
+
+  /* hide the system icon for broken images */
+  img:-moz-broken {
+    -moz-force-broken-image-icon: 0; } }
 .sk-circle {
   margin: 2rem auto;
   width: 40px;

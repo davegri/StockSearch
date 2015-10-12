@@ -3,6 +3,9 @@
  {% load humanize %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
+    <script type="text/javascript">
+
+    </script>
 {% endblock head %}
 
 {% block body %}
@@ -12,8 +15,12 @@
     <h2 class="tagline">search through <strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
     <form action='/search' method="GET" id="search-form">
         <div class="search-box"><input type="text" name="query" placeholder="eg: cute puppies"></div>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F', 'newwindow', 'width=900, height=300'); return false;" class="facebook share" id="facebook-share"></a>
+        <a href="http://twitter.com/intent/tweet?status=LibreStock+http%3A%2F%2Flibrestock.com%2F" onclick="window.open('http://twitter.com/intent/tweet?status=LibreStock+http%3A%2F%2Flibrestock.com%2F', 'newwindow', 'width=900, height=300'); return false;" class="twitter share" id="twitter-share">Tweet!</a>
+        <button type="button" class="secondary-button filter-button">Filter websites</button>
         <div class="checkboxes">
         {% for origin in origins  %}
+        <div class="origin">
           <input type="checkbox" id="{{origin.0}}-checkbox" name="origin" value="{{ origin.0 }}" checked> 
               <label for="{{origin.0}}-checkbox">
                   <span class="circle"></span>
@@ -21,7 +28,7 @@
                   <span class="box"></span>
                   {{ origin.1 }}
               </label> 
-          {% if forloop.counter|divisibleby:7 %}<br />{% endif %}
+          </div>
         {% endfor %}
         </div>
         <input type="submit" class="main-button" value="Find Photos">
@@ -56,6 +63,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 var last_id = "{{ last_id }}";
+</script>
+<script type="text/javascript">
+
+    var f_url = 'http://api.facebook.com/restserver.php?method=links.getStats&urls=http%3A%2F%2Flibrestock.com%2F'
+    $.get(f_url, function(data,status){
+    var share_count = $(data).find('share_count').text();
+    $('#facebook-share').html("("+share_count+") Share!")
+    });
+    var t_url = 'http://urls.api.twitter.com/1/urls/count.json?url=http%3A%2F%2Flibrestock.com%2F'
+    $.ajax({
+        type: 'GET',
+        dataType: 'jsonp',
+        data: {},
+        url: t_url,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR)
+        },
+        success: function (data) {
+          var tweet_count = data['count'];
+          $('#twitter-share').html("("+tweet_count+") Tweet!")
+        }
+    });
+
+filter_button = $('.filter-button')
+checkboxes = $('.checkboxes')
+
+filter_button.on('click', function(){
+  if (filter_button.hasClass('active')){
+      checkboxes.slideToggle(function(){
+        filter_button.toggleClass('active');
+      });
+  }
+  else{
+      filter_button.toggleClass('active');
+      checkboxes.slideToggle();
+  }
+
+});
+
 </script>
 <script type="text/javascript" src={% static "js/infinite_scrolling.js" %}>
 </script>
