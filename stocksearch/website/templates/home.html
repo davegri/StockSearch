@@ -22,12 +22,9 @@
         {% for origin in origins  %}
         <div class="origin">
           <input type="checkbox" id="{{origin.0}}-checkbox" name="origin" value="{{ origin.0 }}" checked> 
-              <label for="{{origin.0}}-checkbox">
-                  <span class="circle"></span>
-                  <span class="check"></span>
-                  <span class="box"></span>
-                  {{ origin.1 }}
-              </label> 
+          <label for="{{origin.0}}-checkbox">
+              {{ origin.1 }}
+          </label> 
           </div>
         {% endfor %}
         </div>

@@ -100,7 +100,6 @@ h1,h2{
         cursor: pointer;
 
     }
-
         &:focus{
         border: 1px solid $primary_color;
         box-shadow: none;
@@ -126,6 +125,7 @@ input[type="text"]{
 
 
 .share{
+  text-align: justify;
   font-size: 0.9rem;
   border-radius: 3px;
   color:white;
@@ -157,10 +157,10 @@ input[type="text"]{
                 transform: scale(1.1,1.1);
                 border-radius: 3px;
               }
-            @media screen and(max-width:616px){
+            @media screen and(max-width:550px){
               @include part_of(1,1%);
             }
-            @media screen and(min-width:616px) and (max-width: 1000px){
+            @media screen and(min-width:550px) and (max-width: 1000px){
               @include part_of(2,1%);
             }
             @media screen and(min-width:1000px) and (max-width: 1250px){

@@ -23,11 +23,36 @@
     clear: both;
     text-align: left;
     border: 1px solid #4d90fe;
-    padding: 1rem 0rem 0rem 1rem; }
+    padding: 1rem 0rem 0.5rem 1rem;
+    border-radius: 6px; }
     .main-header .checkboxes .origin {
-      margin-right: 1rem;
-      margin-bottom: 1rem;
       display: inline-block; }
+      .main-header .checkboxes .origin input {
+        display: none; }
+      .main-header .checkboxes .origin label {
+        background-color: #ebebeb;
+        border: 1px solid #b8b8b8;
+        color: grey;
+        padding: 0.3em 0.7em;
+        border-radius: 6px;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        -webkit-user-select: none;
+        /* Chrome/Safari */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* IE10+ */ }
+        @media screen and (max-width: 600px) {
+          .main-header .checkboxes .origin label {
+            font-size: 1.1rem;
+            padding: 0.5em 0.9em; } }
+      .main-header .checkboxes .origin input[type="checkbox"]:checked + label {
+        background-color: #3480fe;
+        border: 1px solid #106afe;
+        color: white;
+        border-radius: 6px; }
     @media screen and (max-width: 888px) {
       .main-header .checkboxes {
         display: none; } }
@@ -98,5 +123,31 @@
   background-color: white;
   border: 1px solid #2aa9e0;
   color: #2aa9e0; }
+
+@media screen and (max-width: 600px) {
+  .filter-button, .share, input[type="submit"] {
+    width: 100%;
+    padding: 1em; } }
+
+@media screen and (max-width: 600px) {
+  .filter-button {
+    font-size: 1rem; } }
+
+@media screen and (max-width: 600px) {
+  .search-box input[type="text"] {
+    font-size: 1.2rem; } }
+
+@media screen and (max-width: 600px) {
+  .share {
+    margin-left: 2%;
+    float: left;
+    width: 49%;
+    margin-bottom: 0;
+    font-size: 1rem; }
+    .share:nth-of-type(2n+1) {
+      margin-left: 0;
+      clear: both; }
+    .share:nth-of-type(n+3) {
+      margin-top: 2%; } }
 
 /*# sourceMappingURL=home.css.map */
