@@ -256,7 +256,7 @@ class SkitterphotoCrawler(Crawler):
 
 class TookapicCrawler(Crawler):
     origin = 'TP'
-    base_url = 'https://stock.tookapic.com/?filter=free&list=all&page={}'
+    base_url = 'https://stock.tookapic.com/?filter=free&page={}'
     domain = 'www.stock.tookapic.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
