@@ -484,7 +484,7 @@ class GoodstockphotosCrawler(Crawler):
 
 
 class FindaphotoCrawler(Crawler):
-    origin = 'FP'
+    origin = 'IP'
     base_url = 'http://finda.photo/search?q=&page={}'
     domain = 'www.finda.photo/'
     def __init__(self, db_record=None):

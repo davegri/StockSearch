@@ -2,7 +2,7 @@
   padding-top: 10%; }
   @media screen and (max-width: 645px) {
     .container {
-      padding-top: 55%; } }
+      padding-top: 60%; } }
 
 .top-container {
   padding: 2%;
@@ -10,7 +10,7 @@
   margin: 0 auto; }
   @media screen and (max-width: 645px) {
     .top-container {
-      padding: 5% 5% 10% 5%; } }
+      padding: 5% 5% 12% 5%; } }
   .top-container:after {
     clear: both;
     content: ".";

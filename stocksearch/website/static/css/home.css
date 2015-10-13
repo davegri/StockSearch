@@ -1,8 +1,8 @@
 .container {
-  padding-top: 5%; }
+  padding-top: 9%; }
   @media screen and (max-width: 683px) {
     .container {
-      padding-top: 15%; } }
+      padding-top: 25%; } }
 
 .main-header {
   max-width: 855px;
@@ -15,47 +15,6 @@
     .main-header .search-box input {
       padding: 1rem;
       width: 100%; }
-  .main-header .checkboxes {
-    margin-bottom: 1em;
-    width: 100%;
-    height: 100%;
-    display: none;
-    clear: both;
-    text-align: left;
-    border: 1px solid #4d90fe;
-    padding: 1rem 0rem 0.5rem 1rem;
-    border-radius: 6px; }
-    .main-header .checkboxes .origin {
-      display: inline-block; }
-      .main-header .checkboxes .origin input {
-        display: none; }
-      .main-header .checkboxes .origin label {
-        background-color: #ebebeb;
-        border: 1px solid #b8b8b8;
-        color: grey;
-        padding: 0.3em 0.7em;
-        border-radius: 6px;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-        -webkit-user-select: none;
-        /* Chrome/Safari */
-        -moz-user-select: none;
-        /* Firefox */
-        -ms-user-select: none;
-        /* IE10+ */ }
-        @media screen and (max-width: 600px) {
-          .main-header .checkboxes .origin label {
-            font-size: 1.1rem;
-            padding: 0.5em 0.9em; } }
-      .main-header .checkboxes .origin input[type="checkbox"]:checked + label {
-        background-color: #3480fe;
-        border: 1px solid #106afe;
-        color: white;
-        border-radius: 6px; }
-    @media screen and (max-width: 888px) {
-      .main-header .checkboxes {
-        display: none; } }
   .main-header input[type="submit"] {
     display: block;
     margin: 0 auto;
@@ -80,27 +39,6 @@
   padding: 1em; }
   .message a {
     color: white; }
-
-.secondary-button {
-  border-radius: 3px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  background-color: white;
-  color: grey;
-  border: 1px solid grey;
-  padding: 0.7em 1.2em;
-  transition: all 0.2s ease; }
-  .secondary-button:hover {
-    color: #4d90fe;
-    border: 1px solid #4d90fe;
-    cursor: pointer; }
-  .secondary-button:focus {
-    box-shadow: none;
-    outline: none; }
-  .secondary-button.active {
-    color: #4d90fe;
-    border: 1px solid #4d90fe;
-    cursor: pointer; }
 
 .filter-button {
   float: left;

@@ -15,6 +15,16 @@
         <input type="submit" class="main-button" value="Find Photos">
         </div>
         <div></div>
+        <div class="checkboxes">
+        {% for origin in all_origins  %}
+        <div class="origin">
+          <input type="checkbox" id="{{origin.0}}-checkbox" name="origin" value="{{ origin.0 }}" {% if origin.0 in origins_checked %}checked {% endif %}> 
+          <label for="{{origin.0}}-checkbox">
+              {{ origin.1 }}
+          </label> 
+          </div>
+        {% endfor %}
+        </div>
     </form>
 
     </div>
@@ -47,6 +57,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
 var last_id = "{{ last_id }}";
+
+filter_button = $('.filter-button')
+checkboxes = $('.checkboxes')
+
+filter_button.on('click', function(){
+  if (filter_button.hasClass('active')){
+      checkboxes.slideToggle(function(){
+        filter_button.toggleClass('active');
+      });
+  }
+  else{
+      filter_button.toggleClass('active');
+      checkboxes.slideToggle();
+  }
+
+});
+
 </script>
 <script type="text/javascript" src={% static "js/infinite_scrolling.js" %}></script>
 {% endblock body %}
