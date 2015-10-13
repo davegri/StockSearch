@@ -8,7 +8,7 @@
 {% block body %}
 <header class="top-header">
 <div class="top-container">
-    <h1 class="logo"><a href="{% url 'home' %}">Libre<strong>Stock</strong></a></h1>
+    <a class="logo" href="{% url 'home' %}"><img src="{% static "images/WhiteLogo.png" %}" alt="LibreStock" style="height:100px"/></strong></a>
     <form id="search-form">
         <div class="search-box">
         <input type="text" name="query" value="{{query}}">

@@ -12,15 +12,14 @@ $secondary_color: $orange;
 
 
 .container{
-    padding-top: 4%;
+    padding-top: 10%;
             @media screen and (max-width: 645px) {
-    padding-top: 42%;
-
+    padding-top: 55%;
         }
 }
 .top-container{
     @media screen and (max-width: 645px) {
-    padding: 5%;
+    padding: 5% 5% 10% 5%;
     }
     padding: 2%;
     max-width: 95vw;
@@ -87,6 +86,7 @@ $secondary_color: $orange;
         }
     }
     form{
+        top:25.5px;
         text-align: right;
         overflow:hidden;
         height:100%;

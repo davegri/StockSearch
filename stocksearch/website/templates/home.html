@@ -11,7 +11,7 @@
 {% block body %}
 <div class="message">Hey! LibreStock is a community project, why don't you give us feedback on <a href="https://www.facebook.com/LibreStock-400973320096492/timeline/">facebook</a>.</div>
 <header class="main-header">
-    <h1 class="logo"><a href="{% url 'home' %}">Libre<strong>Stock</strong></a></h1>
+    <a href="{% url 'home' %}"><img src="{% static "images/BlueLogo.png" %}" alt="LibreStock" style="height:150px"/></strong></a>
     <h2 class="tagline">search through <strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
     <form action='/search' method="GET" id="search-form">
         <div class="search-box"><input type="text" name="query" placeholder="eg: cute puppies"></div>

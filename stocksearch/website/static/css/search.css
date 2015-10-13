@@ -1,8 +1,8 @@
 .container {
-  padding-top: 4%; }
+  padding-top: 10%; }
   @media screen and (max-width: 645px) {
     .container {
-      padding-top: 42%; } }
+      padding-top: 55%; } }
 
 .top-container {
   padding: 2%;
@@ -10,7 +10,7 @@
   margin: 0 auto; }
   @media screen and (max-width: 645px) {
     .top-container {
-      padding: 5%; } }
+      padding: 5% 5% 10% 5%; } }
   .top-container:after {
     clear: both;
     content: ".";
@@ -63,6 +63,7 @@
         float: none;
         margin-bottom: 1rem; } }
   .top-header form {
+    top: 25.5px;
     text-align: right;
     overflow: hidden;
     height: 100%;

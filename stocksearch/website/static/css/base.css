@@ -30,11 +30,6 @@ h1, h2 {
   margin-top: 2rem;
   margin-bottom: 2rem; }
 
-h1.logo a {
-  font-weight: normal;
-  text-decoration: none;
-  color: inherit; }
-
 .main-button {
   border-radius: 3px;
   font-size: 1.4rem;
