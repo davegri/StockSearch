@@ -1,5 +1,5 @@
 .container {
-  padding-top: 9%; }
+  padding-top: 5%; }
   @media screen and (max-width: 683px) {
     .container {
       padding-top: 25%; } }
@@ -18,9 +18,7 @@
   .main-header input[type="submit"] {
     display: block;
     margin: 0 auto;
-    clear: both;
-    position: relative;
-    top: 1em; }
+    clear: both; }
 
 .popular-tags {
   margin-top: 6rem;

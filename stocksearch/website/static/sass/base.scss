@@ -205,7 +205,7 @@ input[type="text"]{
 
 .photos{
     @include clearfix();
-    margin-top: 3rem;
+    margin-top: 1rem;
     padding:0;
     >li{
         overflow:hidden;
@@ -354,6 +354,28 @@ li:hover .overlay{
     img:-moz-broken {
         -moz-force-broken-image-icon: 0;
     }
+}
+
+
+// ads
+
+#carbonads {
+  margin: 0 auto;
+    margin-top: 2rem;
+    width:100%;
+    border: 1px solid #c6c6c6;
+    padding: 1em;
+    text-align: left;
+
+}
+
+.carbon-img {
+    border: 1px solid #c6c6c6;
+    float: left;
+    margin-right: 1em;
+}
+.carbon-text { 
+    display: block;
 }
 
 

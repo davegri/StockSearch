@@ -3,9 +3,6 @@
  {% load humanize %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{% static "css/home.css" %}">
-    <script type="text/javascript">
-
-    </script>
 {% endblock head %}
 
 {% block body %}
@@ -30,7 +27,9 @@
         </div>
         <input type="submit" class="main-button" value="Find Photos">
     </form>
+<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1696&serve=CVYD42T&placement=librestockcom" id="_carbonads_js"></script>
 </header>
+
 <div class="popular-tags">
 <h3>popular tags</h3>
     {% for tag in tags  %}
@@ -58,6 +57,7 @@
   <div class="sk-circle12 sk-child"></div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="{% static "js/replace.js" %}"></script>
 <script type="text/javascript">
 var last_id = "{{ last_id }}";
 </script>

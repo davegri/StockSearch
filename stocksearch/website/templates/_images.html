@@ -1,3 +1,4 @@
+
 {% spaceless %}
 {% for image in images  %}
     <li class="image">
@@ -8,7 +9,7 @@
       <div class="bounce3"></div>
     </div>
     <div class="overlay">
-        <a href="{{ image.page_url}} " target="_blank" class="button">
+        <a href="{{ image.page_url}} " target="_blank" class="button download">
         Download <span class="origin">at <strong>{{image.get_origin_display}}</strong></span>
         </a><br>
         {% if user.is_staff %}
@@ -25,6 +26,11 @@
     </li>
 {% endfor %}
 {% endspaceless %}
+<script type="text/javascript">
+  if (adblock){
+    $('.download').replaceWith('<span class="button">Please disable Adblock on librestock.com to download photos. You will see only one sexy ad by Carbon Ads.</span><br>');
+  }
+</script>
 <script>
 var last_page
 if ("{{ last_page }}" == "True"){

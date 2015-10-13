@@ -1,5 +1,17 @@
 .container {
   padding-top: 10%; }
+  @media screen and (max-width: 1362px) {
+    .container {
+      padding-top: 12%; } }
+  @media screen and (max-width: 1159px) {
+    .container {
+      padding-top: 13%; } }
+  @media screen and (max-width: 953px) {
+    .container {
+      padding-top: 15%; } }
+  @media screen and (max-width: 749px) {
+    .container {
+      padding-top: 17%; } }
   @media screen and (max-width: 645px) {
     .container {
       padding-top: 60%; } }
@@ -76,5 +88,16 @@
 h2 {
   font-weight: normal;
   margin-top: 5rem; }
+  @media screen and (max-width: 960px) {
+    h2 {
+      clear: both; } }
+
+#carbonads {
+  float: right;
+  max-width: 600px;
+  margin-bottom: 1rem; }
+  @media screen and (max-width: 960px) {
+    #carbonads {
+      max-width: 100%; } }
 
 /*# sourceMappingURL=search.css.map */
