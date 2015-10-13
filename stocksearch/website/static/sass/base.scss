@@ -360,23 +360,43 @@ li:hover .overlay{
 // ads
 
 #carbonads {
-  margin: 0 auto;
-    margin-top: 2rem;
-    width:100%;
-    border: 1px solid #c6c6c6;
-    padding: 1em;
-    text-align: left;
-
+  display: block;
+  overflow: hidden;
+  margin: 2em auto;
+  padding: 1em;
+  max-width: 24em;
+  border: solid 1px #fea81a;
+  line-height: 1.5;
 }
 
-.carbon-img {
-    border: 1px solid #c6c6c6;
+  #carbonads a {
+    font-weight: normal;
+  }
+
+  #carbonads span {
+    display: block;
+    overflow: hidden;
+  }
+
+  .carbon-text {
+    display: block;
+    float: left;
+    max-width: 50%;
+    text-align: left;
+    font-size: .85em;
+  }
+
+  .carbon-img {
     float: left;
     margin-right: 1em;
-}
-.carbon-text { 
+  }
+
+  .carbon-poweredby {
     display: block;
-}
+    float: right;
+    margin-top: -1.9em;
+    font-size: .8em;
+  }
 
 
 // loading animation

@@ -94,7 +94,6 @@ h2 {
 
 #carbonads {
   float: right;
-  max-width: 600px;
   margin-bottom: 1rem; }
   @media screen and (max-width: 960px) {
     #carbonads {
