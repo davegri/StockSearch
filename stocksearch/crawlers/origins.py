@@ -21,7 +21,8 @@ origins = (
         ('PG','Picography'),
         ('NS','Negative Space'),
         ('SH','SplitShire'),
-        ('RS','Realistic Shots')             
+        ('RS','Realistic Shots'),         
+        ('SW','StreetWill')             
 
           
 )

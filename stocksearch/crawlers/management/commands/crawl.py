@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import F
 from django.db.utils import IntegrityError
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -615,7 +616,31 @@ class RealisticshotsCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
 
-crawler_classes = [RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+class StreetwillCrawler(Crawler):
+    origin = 'SW'
+    base_url = 'http://streetwill.co/posts?_=1444819261026&page={}'
+    domain = 'streetwill.co'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        return page_soup.find_all('a', class_='image')
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('div', class_='image-wrapper').find('img')['src'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('div', class_='image-wrapper').find('img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('ul', class_='info-grid')
+
+    def make_absolute_url(self, url,):
+        protocol = "http://"
+        return urljoin(protocol + self.domain, url)
+
+
+crawler_classes = [StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,

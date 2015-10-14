@@ -62,7 +62,7 @@ class Crawler():
         self.nested_scrape = nested_scrape
 
 
-    def make_absolute_url(self, url):
+    def make_absolute_url(self, url,):
         """
         returns an absolute url for a given url using the domain_name property
         example: '/photo/bloom-flower-colorful-colourful-9459/' returns 'https://www.pexels.com/photo/bloom-flower-colorful-colourful-9459/'
