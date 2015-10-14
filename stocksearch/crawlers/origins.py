@@ -19,5 +19,7 @@ origins = (
         ('GS','GoodStockPhotos'),
         ('IP','Finda Photo'),           
         ('PG','Picography'),
-        ('NS','Negative Space')             
+        ('NS','Negative Space'),
+        ('SH','SplitShire')             
+          
 )

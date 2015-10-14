@@ -571,7 +571,29 @@ class NegativespaceCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', class_='tagged_as')
 
-crawler_classes = [PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+class SplitshireCrawler(Crawler):
+    origin = 'SP'
+    base_url = 'http://www.splitshire.com/page/{}/'
+    domain = 'www.splitshire.co'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='featured_img')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('meta', {'property':'og:image'})['content']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('meta', {'property':'og:image'})['content']
+
+    def get_tags(self, image_page_soup):
+        tags = image_page_soup.find_all('meta', {'property':'article:tag'})
+        tag_names = [tag['content'] for tag in tags if tag['content']!='download']
+        return tag_names
+
+crawler_classes = [SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
