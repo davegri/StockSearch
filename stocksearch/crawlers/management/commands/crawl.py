@@ -586,7 +586,7 @@ class SplitshireCrawler(Crawler):
         return image_page_soup.find('meta', {'property':'og:image'})['content']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        if 'Video' in image_page_soup.title:
+        if 'Video' in image_page_soup.title.string:
             raise AttributeError
         return image_page_soup.find('meta', {'property':'og:image'})['content']
 
