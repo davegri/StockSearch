@@ -23,7 +23,8 @@ origins = (
         ('SH','SplitShire'),
         ('RS','Realistic Shots'),         
         ('SW','StreetWill'),           
-        ('BF','Boss Fight')         
+        ('BF','Boss Fight'),     
+        ('LP','LIFE OF PIX')         
 
           
 )

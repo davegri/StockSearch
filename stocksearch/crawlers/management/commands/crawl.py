@@ -661,7 +661,30 @@ class BossfightCrawler(Crawler):
         tag_names = [tag for tag in tags_string.split(', ')]
         return tag_names
 
-crawler_classes = [BossfightCrawler, StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+class LifeofpixCrawler(Crawler):
+    origin = 'LP'
+    base_url = 'http://www.lifeofpix.com/page/{}/'
+    domain = 'www.lifeofpix.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('li', class_='time')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('ul', class_='slides').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('span', class_='post-thumb').find('img')['src']
+
+    def get_tags(self, image_page_soup):
+        tags_string = image_page_soup.find('div', class_='the-content').find('h1').string
+        tag_names = [tag for tag in tags_string.split(', ')]
+        return tag_names
+
+
+crawler_classes = [LifeofpixCrawler, BossfightCrawler, StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
