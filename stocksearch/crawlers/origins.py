@@ -20,6 +20,8 @@ origins = (
         ('IP','Finda Photo'),           
         ('PG','Picography'),
         ('NS','Negative Space'),
-        ('SH','SplitShire')             
+        ('SH','SplitShire'),
+        ('RS','Realistic Shots')             
+
           
 )
