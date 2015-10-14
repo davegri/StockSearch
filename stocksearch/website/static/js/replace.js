@@ -23,5 +23,5 @@ function adBlockNotDetected() {
 
 
  if (adblock){
-   $('.download').replaceWith('<span class="button">Please disable Adblock on librestock.com to download photos. You will see only one sexy ad by Carbon Ads.</span>');
+   $('.download').replaceWith('<span class="button">I rely on ad-revenue to cover server costs. please disable adblocker to download photos - you will see only one ad per page. promise :)</span>');
  }
