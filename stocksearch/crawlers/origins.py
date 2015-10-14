@@ -22,7 +22,8 @@ origins = (
         ('NS','Negative Space'),
         ('SH','SplitShire'),
         ('RS','Realistic Shots'),         
-        ('SW','StreetWill')             
+        ('SW','StreetWill'),           
+        ('BF','Boss Fight')         
 
           
 )

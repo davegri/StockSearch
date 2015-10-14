@@ -639,8 +639,29 @@ class StreetwillCrawler(Crawler):
         protocol = "http://"
         return urljoin(protocol + self.domain, url)
 
+class BossfightCrawler(Crawler):
+    origin = 'BF'
+    base_url = 'http://bossfight.co/page/{}'
+    domain = 'bossfight.co'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
-crawler_classes = [StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('li', class_='has-post-thumbnail')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', text='Download Full Resolution Image Here')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', id='post-thumbnail').find('img')['src']
+
+    def get_tags(self, image_page_soup):
+        tags_string = image_page_soup.find('div', id='post-thumbnail').find('img')['alt']
+        tag_names = [tag for tag in tags_string.split(', ')]
+        return tag_names
+
+crawler_classes = [BossfightCrawler, StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
