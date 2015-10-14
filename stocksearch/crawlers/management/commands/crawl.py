@@ -567,8 +567,10 @@ class NegativespaceCrawler(Crawler):
         return image_page_soup.find('a', class_='button')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='easyzoom').find('img')['srcset'].split(',',1)[0]
-
+        try:
+            return image_page_soup.find('div', class_='easyzoom').find('img')['srcset'].split(',',1)[0]
+        except:
+            return image_page_soup.find('div', class_='easyzoom').find('img')['src']
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', class_='tagged_as')
 
