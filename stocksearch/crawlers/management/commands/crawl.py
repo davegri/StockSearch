@@ -530,8 +530,27 @@ class PicographyCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('ul', class_='hd-labels') 
 
+class NegativespaceCrawler(Crawler):
+    origin = 'NS'
+    base_url = 'http://negativespace.co/photos/page/{}/'
+    domain = 'negativespace.co'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
-crawler_classes = [PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='inner-wrap')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', class_='button')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='easyzoom').find('img')['srcset'].split(',',1)[0]
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('span', class_='tagged_as')
+
+crawler_classes = [NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,

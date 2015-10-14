@@ -18,5 +18,6 @@ origins = (
         ('BI','Barn Images'),
         ('GS','GoodStockPhotos'),
         ('IP','Finda Photo'),           
-        ('PG','Picography')             
+        ('PG','Picography'),
+        ('NS','Negative Space')             
 )
