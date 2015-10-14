@@ -572,7 +572,7 @@ class NegativespaceCrawler(Crawler):
         return image_page_soup.find('span', class_='tagged_as')
 
 class SplitshireCrawler(Crawler):
-    origin = 'SP'
+    origin = 'SH'
     base_url = 'http://www.splitshire.com/page/{}/'
     domain = 'www.splitshire.co'
     def __init__(self, db_record=None):
