@@ -235,6 +235,27 @@ class PixabayolichelCrawler(Crawler):
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
         return tag_container       
 
+class PixabaymarkusspiskeCrawler(Crawler):
+    origin = 'PBMK'
+    base_url = 'https://pixabay.com/en/users/markusspiske-670330/'
+    domain = 'www.pixabay.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='item')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        tag_container = image_page_soup.find('h1')
+        [tag.extract() for tag in tag_container.find_all('a', class_='award')]
+        return tag_container     
 class SkitterphotoCrawler(Crawler):
     origin = 'SP'
     base_url = 'http://skitterphoto.com/?page_id=13&paged={}'
@@ -550,7 +571,7 @@ class NegativespaceCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', class_='tagged_as')
 
-crawler_classes = [NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+crawler_classes = [PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
