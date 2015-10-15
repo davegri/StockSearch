@@ -18,10 +18,10 @@
   .main-header input[type="submit"] {
     display: block;
     margin: 0 auto;
-    clear: both; }
+    clear: both;
+    margin-top: 1rem; }
 
 .popular-tags {
-  margin-top: 6rem;
   text-align: center; }
   .popular-tags a {
     margin-left: 1rem; }
@@ -50,7 +50,13 @@
   background-color: white;
   border: 1px solid #3b5998;
   color: #3b5998;
-  margin-left: 1em; }
+  margin-left: 1em;
+  transition: background-color 0.2s ease; }
+  .facebook:hover {
+    background-color: #3b5998;
+    color: white;
+    background: #3b5998 url(../images/facebook_white.svg) no-repeat 93% center;
+    background-size: 28px 28px; }
 
 .twitter {
   background: url(../images/twitter.svg) no-repeat 93% center;
@@ -58,7 +64,13 @@
   padding-right: 45px;
   background-color: white;
   border: 1px solid #2aa9e0;
-  color: #2aa9e0; }
+  color: #2aa9e0;
+  transition: background-color 0.2s ease; }
+  .twitter:hover {
+    background-color: #2aa9e0;
+    color: white;
+    background: #2aa9e0 url(../images/twitter_white.svg) no-repeat 93% center;
+    background-size: 28px 28px; }
 
 @media screen and (max-width: 600px) {
   .filter-button, .share, input[type="submit"] {
@@ -67,7 +79,8 @@
 
 @media screen and (max-width: 600px) {
   .filter-button {
-    font-size: 1rem; } }
+    font-size: 1rem;
+    margin-bottom: 1rem; } }
 
 @media screen and (max-width: 600px) {
   .search-box input[type="text"] {

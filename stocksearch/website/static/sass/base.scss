@@ -94,7 +94,6 @@ h1,h2{
 
     }
         &:focus{
-        border: 1px solid $primary_color;
         box-shadow: none;
         outline:none;
     }
@@ -362,7 +361,7 @@ li:hover .overlay{
 #carbonads {
   display: block;
   overflow: hidden;
-  margin: 2em auto;
+  margin: 3em auto;
   padding: 1em;
   max-width: 24em;
   border: solid 1px #fea81a;

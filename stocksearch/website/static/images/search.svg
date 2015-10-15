@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+<path fill='#ffffff' id="magnifier-5-icon" d="M460.488,387.166l-117.09-117.09C392.051,169.175,318.504,50,204.959,50
+
+	c-84.686,0-153.584,68.898-153.584,153.585c0,111.723,115.703,185.375,216.308,140.187l118.1,118.097
+
+	C419.373,464.672,463.387,421.922,460.488,387.166z M204.959,306.126c-56.537,0-102.535-45.999-102.535-102.541
+
+	c0-56.539,45.998-102.538,102.535-102.538c56.541,0,102.541,45.999,102.541,102.538C307.5,260.127,261.5,306.126,204.959,306.126z"
+
+	/>
+
+</svg>
+
