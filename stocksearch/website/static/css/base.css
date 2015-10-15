@@ -314,10 +314,11 @@ li:hover .overlay {
   margin: 3em auto;
   padding: 1em;
   max-width: 24em;
-  border: solid 1px #fea81a;
+  border: solid 1px #4d90fe;
   line-height: 1.5; }
 
 #carbonads a {
+  color: #4d90fe;
   font-weight: normal; }
 
 #carbonads span {
