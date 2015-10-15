@@ -11,31 +11,9 @@ $primary_color: $blue;
 $secondary_color: $orange;
 
 
-.container{
-    padding-top: 10%;
-                @media screen and (max-width: 1362px) {
-    padding-top: 12%;
-        }
-                        @media screen and (max-width: 1159px) {
-    padding-top: 13%;
-        }
-                                @media screen and (max-width: 953px) {
-    padding-top: 15%;
-        }
-                                        @media screen and (max-width: 749px) {
-    padding-top: 17%;
-        }
-            @media screen and (max-width: 645px) {
-    padding-top: 60%;
-        }
-}
 .top-container{
-    @media screen and (max-width: 645px) {
-    padding: 5% 5% 12% 5%;
-    }
-    padding: 2%;
-    max-width: 95vw;
-    margin: 0 auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
         &:after{
     clear: both;
     content: ".";
@@ -49,27 +27,29 @@ $secondary_color: $orange;
 
 .top-header{
     background-color: $primary_color;
-    position: absolute;
-    top:0;left:0;
     width: 100%;
     text-align: center;
     input[type="text"]{
         border:none;
         margin-right: 0.5rem;
         padding: 0.7rem;
-        height:50px;
-        width:40%;
-        @media screen and (max-width: 645px) {
+        height:55px;
+        width:50%;
+        @media screen and (max-width: 655px) {
             display:block;
             width:100%;
             margin-bottom: 1rem;
         }
     }
     input[type="submit"]{
+        font-size: 1.1rem;
         padding: 0.7rem 1.2em;
-        height:50px;
+        height:55px;
         vertical-align: top;
-        @media screen and (max-width: 645px) {
+        @media screen and (max-width: 655px) {
+            font-size: 1.4rem;
+            padding: 1em;
+            height:auto;
             display:block;
             width:100%;
         }
@@ -92,9 +72,10 @@ $secondary_color: $orange;
         margin:0;
         float:left;
         height:100%;
-        @media screen and (max-width: 645px) {
+        @media screen and (max-width: 655px) {
             float:none;
-            margin-bottom: 1rem;
+            display:block;
+            margin-bottom: 2rem;
         }
     }
     form{
@@ -103,6 +84,9 @@ $secondary_color: $orange;
         overflow:hidden;
         height:100%;
         position:relative;
+        @media screen and (max-width: 655px) {
+            position:initial;
+        }
     }
 
 }
@@ -116,18 +100,19 @@ $secondary_color: $orange;
 
 h2{
     font-weight: normal;
-    margin-top: 5rem;
-                                @media screen and (max-width: 960px) {
+    margin:0;
     clear:both;
-        }
+    margin-bottom: 1em;
 }
 
 #carbonads {
     float:right;
+    margin:0;
+    @media screen and (max-width: 650px) {
+        max-width:100%;
+    }
     margin-bottom: 1rem;
-            @media screen and (max-width: 960px) {
-    max-width:100%;
-        }
+
 }
 
 .carbon-img {

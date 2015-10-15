@@ -47,10 +47,8 @@
 </script>
 </head>
 <body>
-<div class="container">
 {% block body %}
 {% endblock body %}
-</div>
 <script>
 $("img").one("load", function() {
   $(this).parent().find('.spinner').hide();

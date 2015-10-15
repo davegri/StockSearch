@@ -6,7 +6,27 @@
 {% endblock head %}
 
 {% block body %}
-<div class="message">Hey! LibreStock is a community project, why don't you give us feedback on <a href="https://www.facebook.com/LibreStock-400973320096492/timeline/">facebook</a>.</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=1475525732751150";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="top-bar">
+  <div class="container">
+  <ul>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><div class="fb-like" data-href="https://www.facebook.com/LibreStock/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></li>
+    <li><a href="https://twitter.com/libre_stock" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @libre_stock</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+  <li><div class="g-follow" data-href="https://plus.google.com/111687744879945527894" data-rel="publisher" data-annotation='none'></div></li>
+  </ul>
+  </div>
+</div>
+<div class="container">
 <header class="main-header">
     <a href="{% url 'home' %}"><img src="{% static "images/BlueLogo.png" %}" alt="LibreStock" style="height:150px"/></strong></a>
     <h2 class="tagline">search through <strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
@@ -55,6 +75,7 @@
   <div class="sk-circle10 sk-child"></div>
   <div class="sk-circle11 sk-child"></div>
   <div class="sk-circle12 sk-child"></div>
+</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="{% static "js/replace.js" %}"></script>

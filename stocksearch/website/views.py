@@ -41,6 +41,11 @@ def home(request):
     return render(request, 'home.html', context_dict)
 
 
+
+def about(request):
+    return render(request, 'about.html', {})
+
+
 @ensure_csrf_cookie
 def search(request):
     all_origins = Image._meta.get_field('origin').choices

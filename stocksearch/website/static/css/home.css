@@ -1,8 +1,5 @@
 .container {
-  padding-top: 5%; }
-  @media screen and (max-width: 683px) {
-    .container {
-      padding-top: 25%; } }
+  padding-top: 2%; }
 
 .main-header {
   max-width: 855px;

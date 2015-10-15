@@ -17,6 +17,27 @@ body {
   color: #222;
   margin: 0; }
 
+.top-bar {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e5e5e5; }
+  .top-bar .container {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em; }
+  .top-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .top-bar ul li {
+      display: inline;
+      padding: 0em 0.5em;
+      border-right: 1px solid #dfdfdf; }
+      .top-bar ul li #twitter-widget-0 {
+        vertical-align: sub; }
+      .top-bar ul li > div {
+        vertical-align: top !important; }
+      .top-bar ul li:last-of-type {
+        border: none; }
+
 .container {
   padding: 2%;
   max-width: 95vw;

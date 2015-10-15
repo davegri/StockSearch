@@ -19,6 +19,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^search/$', views.search, name="search"),
+    url(r'^about/$', views.about, name="about"),    
     url(r'^images/$', views.get_images_ajax),
     url(r'^hide/(?P<id>\d+)$', views.hide, name="hide"),
 ]

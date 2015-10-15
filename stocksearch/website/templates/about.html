@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/about.css" %}">
+{% endblock head %}
+
+{% block title %}
+About | LibreStock
+{% endblock title %}
+
+{% block body %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=1475525732751150";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<div class="top-bar">
+  <div class="container">
+  <ul>
+    <li><a href="{% url 'about' %}">About</a></li>
+    <li><div class="fb-like" data-href="https://www.facebook.com/LibreStock/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div></li>
+    <li><a href="https://twitter.com/libre_stock" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @libre_stock</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+  <li><div class="g-follow" data-href="https://plus.google.com/111687744879945527894" data-rel="publisher" data-annotation='none'></div></li>
+  </ul>
+  </div>
+</div>
+<div class="container">
+<style type="text/css">
+</style>
+<a  href="{% url 'home' %}"><img src="{% static "images/BlueLogo.png" %}" class="logo" alt="LibreStock" style="height:150px"/></strong></a>
+<div class="text-container">
+<h2>What is LibreStock?</h2>
+<p>you know those lists in every blog?</p>
+<blockquote>17 amazing websites with free stock photos</blockquote>
+<p>or maybe</p>
+<blockquote>27 superb websites for finding commercial free stock images</blockquote>
+<p><strong>Who the hell wants to look through 27 different websites?</strong></p>
+<p>Librestock is a meta search engine that scans and indexes the stock photos from 20+ different websites. We provide you with the biggest searchable database of high-quality stock photos on the internet</p>
+
+<h2>License</h2>
+<p>I know it's hard to understand complex legal licenses, so let me break it down for you. all the photos indexed on LibreStock are licensed under the Creative Commons Zero (CC0) license. this means you can use these pictures freely for any legal purpose</p>
+<strong>
+<p>Free for commercial & personal use</p>
+<p>You can modify copy and distribute</p>
+<p>No attribution required</p>
+</strong>
+
+<h2>More Info</h2>
+<p>If you would like to donate to help cover server costs and keep LibreStock going use the button below:</p>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FRUJ7J8X43DWN&lc=IL&item_name=LibreStock&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted" class="paypal-button"><span>Support Us</span></a>
+<p>If you would like to contact me send an email over to contact@librestock.com</p>
+</div>
+</div>
+{% endblock body %}

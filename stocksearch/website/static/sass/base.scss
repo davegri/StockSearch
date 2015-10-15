@@ -61,6 +61,34 @@ body{
     margin: 0;
 }
 
+.top-bar{
+  .container{
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  }
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e5e5e5;
+  ul{
+    list-style: none;
+    padding:0;
+    margin:0;
+    li{
+      display:inline;
+      padding: 0em 0.5em;
+      border-right: 1px solid #dfdfdf;
+      #twitter-widget-0{
+        vertical-align: sub;
+      }
+      >div{
+        vertical-align: top!important;
+      }
+      &:last-of-type{
+        border:none;
+      }
+    }
+  }
+}
+
 .container{
     padding: 2%;
     max-width: 95vw;
