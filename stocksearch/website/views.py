@@ -50,7 +50,6 @@ def search(request):
     page = request.GET.get('page', 1)
     last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
     images, amount = get_images_paginated(query, origins_checked, page, last_id)
-
     pages = int(math.ceil(amount / 20))
     if page >= pages:
         last_page = True
@@ -126,7 +125,7 @@ def get_images_paginated(query, origins, page_num, last_id=None):
     if origins:
         origins = [Q(origin=origin) for origin in origins]
         args = reduce(operator.or_, origins)
-        queryset = queryset.filter(args)        
+        queryset = queryset.filter(args)
 
     if query.isdigit():
         pk = int(query)
@@ -137,9 +136,9 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         return images, amount
 
     if query:
-        images = watson.filter(queryset, query)
+        images = watson.filter(queryset, query).distinct()
     else:
-        images = watson.filter(queryset, query).order_by('-id')
+        images = watson.filter(queryset, query).order_by('-id').distinct()
     amount = images.count()
     images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
 
