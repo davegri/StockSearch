@@ -685,8 +685,73 @@ class LifeofpixCrawler(Crawler):
         tag_names = [tag for tag in tags_string.split(', ')]
         return tag_names
 
+class PublicdomainarchiveCrawler(Crawler):
+    origin = 'PD'
+    base_url = 'http://publicdomainarchive.com/public-domain-images/page/{}/'
+    domain = 'publicdomainarchive.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
-crawler_classes = [LifeofpixCrawler, BossfightCrawler, StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler, NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabayfoundryCrawler, FindaphotoCrawler,
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('article')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', text='Download')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='size-large')['src']
+
+    def get_tags(self, image_page_soup):
+        tags_string = image_page_soup.find('h1').string.replace('Public Domain Images – ','')
+        tag_names = [tag for tag in tags_string.split(' ')]
+        return tag_names
+
+class BucketlistlyCrawler(Crawler):
+    origin = 'BL'
+    base_url = 'http://photos.bucketlistly.com/page/{}'
+    domain = 'photos.bucketlistly.com'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('div', class_='photo')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find(lambda x: x.has_attr('download'))['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find('a')['href']
+
+class FreeimagebankCrawler(Crawler):
+    origin = 'FB'
+    base_url = 'http://www.freemagebank.com/page/{}/'
+    domain = 'www.freemagebank.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        return page_soup.find_all('a', class_='dcs_view_details')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='wp-post-image')['src']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='wp-post-image')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('span', text='#Tags').find_parent()
+
+crawler_classes = [FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+                   StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
+                   NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler,
+                   PixabayfoundryCrawler, FindaphotoCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,

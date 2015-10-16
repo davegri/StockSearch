@@ -24,7 +24,8 @@ origins = (
         ('RS','Realistic Shots'),         
         ('SW','StreetWill'),           
         ('BF','Boss Fight'),     
-        ('LP','LIFE OF PIX')         
-
-          
+        ('LP','LIFE OF PIX'),       
+        ('PD','public domain archive'),
+        ('BL','Bucketlistly Photos'),
+        ('FB','Free Image Bank')
 )
