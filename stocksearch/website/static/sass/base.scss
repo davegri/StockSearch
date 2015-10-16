@@ -3,7 +3,7 @@ $grey: #c6c6c6;
 $dark_grey: #757575;
 
 
-$orange: #fea81a;
+$orange: #d9760d;
 $blue: #4d90fe;
 
 
@@ -102,6 +102,11 @@ h1{
 
 h1,h2{
   margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h4{
+  margin-top: 0;
   margin-bottom: 2rem;
 }
 

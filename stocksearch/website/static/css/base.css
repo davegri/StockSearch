@@ -6,7 +6,7 @@ a {
   color: black;
   transition: color 0.2s ease;
   text-decoration: none;
-  color: #fea81a;
+  color: #d9760d;
   font-weight: bold; }
   a:hover {
     text-decoration: underline; }
@@ -49,6 +49,10 @@ h1 {
 
 h1, h2 {
   margin-top: 2rem;
+  margin-bottom: 1rem; }
+
+h4 {
+  margin-top: 0;
   margin-bottom: 2rem; }
 
 .main-button {

@@ -29,7 +29,9 @@
 <div class="container">
 <header class="main-header">
     <a href="{% url 'home' %}"><img src="{% static "images/BlueLogo.png" %}" alt="LibreStock" style="height:150px"/></strong></a>
-    <h2 class="tagline">search through <strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos</h2>
+
+<h2 class="tagline"> search the best <strong>{{ origins|length }}</strong> free stock photo websites in one place</h2>
+    <h4 class="tagline"><strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos, <a href="{% url 'about' %}">learn more</a>.</h2>
     <form action='/search' method="GET" id="search-form">
         <div class="search-box"><input type="text" name="query" placeholder="eg: cute puppies"></div>
         <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F', 'newwindow', 'width=900, height=300'); return false;" class="facebook share" id="facebook-share"></a>
