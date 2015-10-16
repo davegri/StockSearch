@@ -124,7 +124,7 @@ def get_images_paginated(query, origins, page_num, last_id=None):
     args = None
     queryset = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True)
     if last_id is not None:
-        queryset = queryset.filter(id__lt=last_id)
+        queryset = queryset.filter(id__lte=last_id)
     per_page = 20
     page_num = int(page_num)
     if origins:
