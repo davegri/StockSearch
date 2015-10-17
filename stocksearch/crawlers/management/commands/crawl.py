@@ -700,7 +700,7 @@ class PublicdomainarchiveCrawler(Crawler):
         return image_page_soup.find('a', text='Download')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('img', class_='size-large')['src']
+        return image_page_soup.find('div', class_='entry-content').find('p').find('img')['src']
 
     def get_tags(self, image_page_soup):
         tags_string = image_page_soup.find('h1').string.replace('Public Domain Images – ','')
