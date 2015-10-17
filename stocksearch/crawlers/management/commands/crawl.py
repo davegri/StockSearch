@@ -748,7 +748,39 @@ class FreeimagebankCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', text='#Tags').find_parent()
 
-crawler_classes = [FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class CreativevixCrawler(Crawler):
+    origin = 'CV'
+    base_url = 'http://creativevix.com/stock{}'
+    first_page_url = 'http://creativevix.com/stock'
+    domain = 'creativevix.com'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False, first_page_url=self.first_page_url)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('li',class_="work-item")
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('a',text="Download")['href'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img')['data-src'])
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
+
+    def get_tags(self, image_page_soup):
+        tags_string = image_page_soup.find('img')['alt']
+        tag_names = [tag for tag in tags_string.split(' ')]
+        return tag_names
+
+    def get_image_page_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('a',text="Download")['href'])
+        
+    def make_absolute_url(self, url,):
+        protocol = "http://"
+        return urljoin(protocol + self.domain, url)
+
+crawler_classes = [CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler,
                    PixabayfoundryCrawler, FindaphotoCrawler, BossfightCrawler,

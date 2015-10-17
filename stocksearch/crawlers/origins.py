@@ -27,5 +27,6 @@ origins = (
         ('LP','LIFE OF PIX'),       
         ('PD','public domain archive'),
         ('BL','Bucketlistly Photos'),
-        ('FB','Free Image Bank')
+        ('FB','Free Image Bank'),
+        ('CV','CREATIVE VIX')        
 )
