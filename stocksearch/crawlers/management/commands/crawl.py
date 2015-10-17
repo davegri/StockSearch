@@ -560,7 +560,7 @@ class NegativespaceCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('div', class_='inner-wrap')
+        containers = page_soup.find('section' id='products').find_all('div', class_='inner-wrap')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
