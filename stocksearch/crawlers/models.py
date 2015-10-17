@@ -66,7 +66,7 @@ class Image(models.Model):
             size = 500, 500
             img = Imagelib.open(r.raw)
             thumb = ImageOps.fit(img, size, Imagelib.ANTIALIAS)
-            if image.mode == 'LA':
+            if thumb.mode == 'LA':
                 print('image mode can\'t be LA')
                 return False
 
