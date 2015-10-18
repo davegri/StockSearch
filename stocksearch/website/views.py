@@ -127,7 +127,7 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         queryset = queryset.filter(id__lte=last_id)
     per_page = 20
     page_num = int(page_num)
-    if origins:
+    if origins and len(origins)<len(Image._meta.get_field('origin').choices):
         origins = [Q(origin=origin) for origin in origins]
         args = reduce(operator.or_, origins)
         queryset = queryset.filter(args)
