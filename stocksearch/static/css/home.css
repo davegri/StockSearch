@@ -1,0 +1,99 @@
+.container {
+  padding-top: 2%; }
+
+.main-header {
+  max-width: 855px;
+  margin: 0 auto;
+  text-align: center; }
+  .main-header .tagline {
+    font-weight: normal; }
+  .main-header .search-box {
+    font-size: 1.5rem; }
+    .main-header .search-box input {
+      padding: 1rem;
+      width: 100%; }
+  .main-header input[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    margin-top: 1rem; }
+
+.popular-tags {
+  text-align: center; }
+  .popular-tags a {
+    margin-left: 1rem; }
+
+.message {
+  color: white;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #4d90fe;
+  text-align: center;
+  padding: 1em; }
+  .message a {
+    color: white; }
+
+.filter-button {
+  float: left;
+  margin-top: 1em;
+  margin-bottom: -1px; }
+
+.facebook {
+  background: url(../images/facebook.svg) no-repeat 93% center;
+  background-size: 28px 28px;
+  padding-right: 45px;
+  background-color: white;
+  border: 1px solid #3b5998;
+  color: #3b5998;
+  margin-left: 1em;
+  transition: background-color 0.2s ease; }
+  .facebook:hover {
+    background-color: #3b5998;
+    color: white;
+    background: #3b5998 url(../images/facebook_white.svg) no-repeat 93% center;
+    background-size: 28px 28px; }
+
+.twitter {
+  background: url(../images/twitter.svg) no-repeat 93% center;
+  background-size: 28px 28px;
+  padding-right: 45px;
+  background-color: white;
+  border: 1px solid #2aa9e0;
+  color: #2aa9e0;
+  transition: background-color 0.2s ease; }
+  .twitter:hover {
+    background-color: #2aa9e0;
+    color: white;
+    background: #2aa9e0 url(../images/twitter_white.svg) no-repeat 93% center;
+    background-size: 28px 28px; }
+
+@media screen and (max-width: 600px) {
+  .filter-button, .share, input[type="submit"] {
+    width: 100%;
+    padding: 1em; } }
+
+@media screen and (max-width: 600px) {
+  .filter-button {
+    font-size: 1rem;
+    margin-bottom: 1rem; } }
+
+@media screen and (max-width: 600px) {
+  .search-box input[type="text"] {
+    font-size: 1.2rem; } }
+
+@media screen and (max-width: 600px) {
+  .share {
+    margin-left: 2%;
+    float: left;
+    width: 49%;
+    margin-bottom: 0;
+    font-size: 1rem; }
+    .share:nth-of-type(2n+1) {
+      margin-left: 0;
+      clear: both; }
+    .share:nth-of-type(n+3) {
+      margin-top: 2%; } }
+
+/*# sourceMappingURL=home.css.map */

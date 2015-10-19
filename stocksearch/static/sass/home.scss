@@ -1,0 +1,134 @@
+
+.container{
+    padding-top: 2%;
+}
+
+
+.main-header{
+    max-width: 855px;
+    margin: 0 auto;
+    text-align: center;
+    .tagline{
+        font-weight: normal;
+    }
+    .search-box{
+        font-size: 1.5rem;
+        input{
+            padding: 1rem;
+            width:100%;
+        }
+    }
+    input[type="submit"]{
+        display:block;
+        margin: 0 auto;
+        clear:both;
+        margin-top: 1rem;
+    }
+}
+
+.popular-tags{
+    text-align: center;
+    a{
+        margin-left: 1rem;
+    }
+}
+
+
+.message{
+    color:white;
+    position: absolute;
+    width:100%;
+    left:0;
+    top:0;
+    background-color: #4d90fe;
+    text-align: center;
+    padding: 1em;
+    a{
+        color:white;
+    }
+}
+
+
+.filter-button{
+    float:left;
+    margin-top: 1em;
+    margin-bottom: -1px;
+}
+
+.facebook{
+    background: url(../images/facebook.svg) no-repeat 93% center;
+    background-size: 28px 28px;
+    padding-right: 45px;
+    background-color:white;
+    border: 1px solid #3b5998;
+    color: #3b5998;
+    margin-left: 1em;
+    transition: background-color 0.2s ease;
+    &:hover{
+        background-color:#3b5998;
+        color:white;
+        background: #3b5998 url(../images/facebook_white.svg) no-repeat 93% center;
+        background-size: 28px 28px;
+    }
+}
+
+.twitter{
+    background: url(../images/twitter.svg) no-repeat 93% center;
+    background-size: 28px 28px;
+    padding-right: 45px;
+    background-color:white;
+    border: 1px solid #2aa9e0;
+    color: #2aa9e0;
+    transition: background-color 0.2s ease;
+    &:hover{
+        background-color:#2aa9e0;
+        color:white;
+        background: #2aa9e0 url(../images/twitter_white.svg) no-repeat 93% center;
+        background-size: 28px 28px;
+    }
+}
+
+
+.filter-button, .share, input[type="submit"]{
+    @media screen and(max-width: 600px){
+    width:100%;
+    padding: 1em;
+  }
+}
+
+.filter-button{
+       @media screen and(max-width: 600px){
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  } 
+}
+
+.search-box{
+    input[type="text"]{
+           @media screen and(max-width: 600px){
+    font-size: 1.2rem;
+
+  } 
+}
+}
+@mixin part_of($num, $gutter_percent: $gutter_percent){
+        margin-left: $gutter_percent;
+        float: left;
+        width: (100 - $gutter_percent * ($num - 1)) / $num;
+        &:nth-of-type(#{$num}n+1){
+        margin-left: 0;
+        clear:both;
+        }
+        &:nth-of-type(n+#{($num+1)}){
+        margin-top:$gutter_percent;
+        }
+}
+.share{
+    @media screen and(max-width: 600px){
+    @include part_of(2, 2%);
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+}
+
+
