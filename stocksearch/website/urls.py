@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^about/$', views.about, name="about"),    
     url(r'^images/$', views.get_images_ajax),
     url(r'^hide/(?P<id>\d+)$', views.hide, name="hide"),
+    url(r'^incrementimageclicks/$', views.increment_image_clicks),
 ]

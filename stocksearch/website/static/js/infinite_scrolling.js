@@ -42,6 +42,7 @@ $.ajaxSetup({
             this.$image_ul = $('ul.photos');
             this.$form = $('#search-form');
             this.$more_button = $('.load-more');
+            this.$download_button = $('.download')
         },
         bindEvents: function(){
             $(document).on('scroll', function(){
@@ -56,6 +57,9 @@ $.ajaxSetup({
                 this.$more_button.hide()
                 this.getImages();
             }.bind(this));
+                this.$download_button.on('click', function(){
+                this.incrementImageClicks(event.currentTarget.id);
+            }.bind(this));        
 
             $(document).ajaxStart(function(){
                 $('#preloader').show()
@@ -100,6 +104,19 @@ $.ajaxSetup({
                 }.bind(this)
             });
         }
+        },
+        incrementImageClicks: function(image_id){
+            $.ajax({
+                url : "/incrementimageclicks/",
+                type : "POST",
+                data : {'id':image_id}, 
+                success : function(html) {
+                    console.log("success");
+                },
+                error : function(xhr,errmsg,err) {
+                    console.log("error");
+                },
+            });
         }
     };
     Gallery.init();

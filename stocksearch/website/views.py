@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from crawlers.models import Image, Tag
+from .models import SearchQuery
 import operator
 from functools import reduce
 from django.db.models import Q
 from django.db.models import Count
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from time import sleep;
 import operator
 import re
@@ -48,11 +49,22 @@ def about(request):
 
 @ensure_csrf_cookie
 def search(request):
+
+
+
     all_origins = Image._meta.get_field('origin').choices
     all_origins = [origin[0] for origin in all_origins]
     query = request.GET.get('query', False)
     origins_checked = request.GET.getlist('origin') or all_origins
     page = request.GET.get('page', 1)
+
+    # log search in database
+    search_query, created = SearchQuery.objects.get_or_create(text=query)
+    if not created:
+        search_query.amount += 1
+        search_query.save(update_fields=['amount',])
+
+
     last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
     images, amount = get_images_paginated(query, origins_checked, page, last_id)
     pages = int(math.ceil(amount / 20))
@@ -155,3 +167,12 @@ def hide(request, id):
     image.hidden = True
     image.save()
     return redirect('home')
+
+def increment_image_clicks(request):
+    if not request.is_ajax():
+        return render(request, 'home.html')
+    id = request.POST.get('id')
+    image = Image.objects.get(id=id)
+    image.clicks += 1
+    image.save(update_fields=['clicks',])
+    return HttpResponse('1')
