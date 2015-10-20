@@ -74,12 +74,12 @@ h2 {
   clear: both;
   margin-bottom: 1em; }
 
-#carbonads {
+#carbonads, .ab-msg {
   float: right;
   margin: 0;
   margin-bottom: 1rem; }
   @media screen and (max-width: 650px) {
-    #carbonads {
+    #carbonads, .ab-msg {
       max-width: 100%; } }
 
 /*# sourceMappingURL=search.css.map */
