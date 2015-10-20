@@ -49,9 +49,6 @@ def about(request):
 
 @ensure_csrf_cookie
 def search(request):
-
-
-
     all_origins = Image._meta.get_field('origin').choices
     all_origins = [origin[0] for origin in all_origins]
     query = request.GET.get('query', False)
@@ -65,7 +62,7 @@ def search(request):
         search_query.save(update_fields=['amount',])
 
 
-    last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
+    last_id = Image.objects.values('id').latest('id')['id']
     images, amount = get_images_paginated(query, origins_checked, page, last_id)
     pages = int(math.ceil(amount / 20))
     if page >= pages:
@@ -134,7 +131,7 @@ def get_images_ajax(request):
 
 def get_images_paginated(query, origins, page_num, last_id=None):
     args = None
-    queryset = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True)
+    queryset = Image.objects.all()
     if last_id is not None:
         queryset = queryset.filter(id__lte=last_id)
     per_page = 20
@@ -153,12 +150,10 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         return images, amount
 
     if query:
-        images = watson.filter(queryset, query).distinct()
+        images = watson.filter(queryset, query).distinct().prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     else:
-        images = watson.filter(queryset, query).order_by('-id').distinct()
+        images = watson.filter(queryset, query).order_by('-id').distinct().prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     amount = images.count()
-    images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
-
     return images, amount
 
 @staff_member_required
