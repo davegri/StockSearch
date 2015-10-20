@@ -7,6 +7,7 @@ from .blockhash import blockhash, blockhash_even
 import os
 from io import BytesIO
 import requests
+from django.db.models import Q
 
 from django.conf import settings as djangoSettings
 
@@ -22,6 +23,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        return super(ActiveManager, self).get_queryset().all().exclude(Q(hidden=True) | Q(tags__isnull=True))
+
 class Image(models.Model):
 
     source_url = models.URLField(max_length=400)
@@ -33,8 +38,13 @@ class Image(models.Model):
     hidden = models.BooleanField(default=False)
     clicks = models.IntegerField(default=0)
 
+    active = ActiveManager()
+    objects = models.Manager()
+    
     def __str__(self):
         return self.page_url
+
+
 
     def create_hash(self):
         thumbnail = Imagelib.open(self.thumbnail.path)

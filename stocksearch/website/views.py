@@ -25,11 +25,11 @@ from django.views.decorators.cache import cache_page
 def home(request):
     per_page = 20
     page_num = 1
-    images = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
+    images = Image.active.all().order_by('-id').prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
     tags = Tag.objects.all().annotate(num_times=Count('image')).order_by('-num_times')[:10]
     origins = Image._meta.get_field('origin').choices
-    last_id = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).order_by('-id')[0].id
-    total_image_count = Image.objects.all().exclude(hidden=True).exclude(tags__isnull=True).count()
+    last_id = Image.active.all().order_by('-id')[0].id
+    total_image_count = Image.active.all().count()
 
     context_dict = {
     'images':images,
@@ -131,7 +131,7 @@ def get_images_ajax(request):
 
 def get_images_paginated(query, origins, page_num, last_id=None):
     args = None
-    queryset = Image.objects.all()
+    queryset = Image.active.all()
     if last_id is not None:
         queryset = queryset.filter(id__lte=last_id)
     per_page = 20
