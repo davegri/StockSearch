@@ -312,7 +312,7 @@ li:hover .overlay {
   /* hide the system icon for broken images */
   img:-moz-broken {
     -moz-force-broken-image-icon: 0; } }
-#carbonads {
+#carbonads, .ab-msg {
   display: block;
   overflow: hidden;
   margin: 3em auto;
