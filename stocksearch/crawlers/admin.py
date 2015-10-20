@@ -12,6 +12,7 @@ class TagInline(admin.TabularInline):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     search_fields = ['tags__name','page_url']
+    list_display = ("page_url","clicks")
     readonly_fields=['tags']
 
     def tags(self, image):
