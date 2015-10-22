@@ -65,7 +65,8 @@ class Image(models.Model):
                 try:
                     r = requests.get(image_url, stream=True, headers=headers)
                 except requests.exceptions.ConnectionError:
-                    r.status_code = "Connection refused"
+                    print("error loading image url, connection error")
+                    break
                 if r.status_code != 200 and r.status_code!= 304:
                     print("error loading image url status code: {}".format(r.status_code))
                     time.sleep(2)
