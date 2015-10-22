@@ -62,7 +62,10 @@ class Image(models.Model):
                 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
             }
             for i in range(5):
-                r = requests.get(image_url, stream=True, headers=headers)
+                try:
+                    r = requests.get(image_url, stream=True, headers=headers)
+                except requests.exceptions.ConnectionError:
+                    r.status_code = "Connection refused"
                 if r.status_code != 200 and r.status_code!= 304:
                     print("error loading image url status code: {}".format(r.status_code))
                     time.sleep(2)

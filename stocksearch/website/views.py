@@ -144,15 +144,15 @@ def get_images_paginated(query, origins, page_num, last_id=None):
     if query.isdigit():
         pk = int(query)
         image = Image.objects.get(pk=pk)
-        images = Image.objects.extra(select={'dist':'hamming_text(hash,%s)'},
-                                     select_params=[image.hash]).exclude(pk=pk).order_by('-dist')[(per_page*page_num)-per_page:per_page*page_num]
-        amount = len(images)
-        return images, amount
-
-    if query:
-        images = watson.filter(queryset, query).distinct()
+        images = queryset.filter(tags__in=image.tags.all()).\
+                        annotate(num_common_tags=Count('id')).filter(num_common_tags__gte=2  ).order_by('-num_common_tags')
+        # images = queryset.extra(select={'dist':'hamming_text(hash,%s)'}, where=['hamming_text(hash,%s)>0.6'], params=[image.hash,],
+        #                              select_params=[image.hash,image.hash]).exclude(hash="").distinct()
     else:
-        images = watson.filter(queryset, query).order_by('-id').distinct()
+        if query:
+            images = watson.filter(queryset, query).distinct()
+        else:
+            images = watson.filter(queryset, query).order_by('-id').distinct()
     
     amount = images.count()
     images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
