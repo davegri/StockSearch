@@ -801,7 +801,92 @@ class CreativevixCrawler(Crawler):
         protocol = "http://"
         return urljoin(protocol + self.domain, url)
 
-crawler_classes = [CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class DesignerpicsCrawler(Crawler):
+    origin = 'DP'
+    base_url = 'http://www.designerspics.com/page/{}/'
+    domain = 'www.designerspics.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='photos')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='wpdm_file').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='wp-post-image')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='photo-tags')
+
+class FreestocksCrawler(Crawler):
+    origin = 'FS'
+    base_url = 'http://freestocks.org/page/{}/'
+    domain = 'freestocks.org'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('article', class_='post')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('p', class_='tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find('a')['href']
+
+class TravelcoffeebookCrawler(Crawler):
+    origin = 'TC'
+    base_url = 'http://travelcoffeebook.com/page/{}'
+    domain = 'travelcoffeebook.com'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all(lambda tag: tag.name == 'div' and 
+                                   tag.get('class') == ['post'])
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='photoCaption').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='media').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find(class_='datenotes').find('a')['href']
+
+class FoodiesfeedCrawler(Crawler):
+    origin = 'FF'
+    base_url = 'https://foodiesfeed.com/free-food-images/page/{}/'
+    domain = 'foodiesfeed.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='post-thumbnail')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='wpdm-link-tpl')['data-durl']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry').find('p').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('p', class_='post-tag')
+
+crawler_classes = [FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler,
                    PixabayfoundryCrawler, FindaphotoCrawler, BossfightCrawler,

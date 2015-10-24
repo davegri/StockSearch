@@ -28,5 +28,10 @@ origins = (
         ('PD','public domain archive'),
         ('BL','Bucketlistly Photos'),
         ('FB','Free Image Bank'),
-        ('CV','CREATIVE VIX')        
+        ('CV','CREATIVE VIX'),        
+        ('DP','DesignerPics'),
+        ('FS','freestocks'),        
+        ('TC','travel coffee book'),        
+        ('FF','FOODIES FEED'),        
+
 )

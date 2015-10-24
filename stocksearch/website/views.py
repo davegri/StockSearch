@@ -42,7 +42,7 @@ def home(request):
     return render(request, 'home.html', context_dict)
 
 
-
+@cache_page(60 * 60 * 12)
 def about(request):
     return render(request, 'about.html', {})
 
@@ -150,9 +150,9 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         #                              select_params=[image.hash,image.hash]).exclude(hash="").distinct()
     else:
         if query:
-            images = watson.filter(queryset, query).distinct()
+            images = watson.filter(queryset, query)
         else:
-            images = watson.filter(queryset, query).order_by('-id').distinct()
+            images = watson.filter(queryset, query).order_by('-id')
     
     amount = images.count()
     images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
