@@ -906,7 +906,48 @@ class MystockphotosCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='single_tags')
 
-crawler_classes = [MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class IsorepublicCrawler(Crawler):
+    origin = 'IR'
+    base_url = 'http://isorepublic.com/page/{}/'
+    domain = 'isorepublic.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='image')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', class_='dl')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='image').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('ul', class_='tags')
+
+class JeshootsCrawler(Crawler):
+    origin = 'JS'
+    base_url = 'http://jeshoots.com/page/{}/'
+    first_page_url = 'http://jeshoots.com'
+    domain = 'jeshoots.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, first_page_url=self.first_page_url)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='item-download')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='item-download').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-image').find('img')['src']
+
+    def get_tags(self, image_page_soup):
+        return image_page_soup.find('h1', class_='entry-title').string,
+
+crawler_classes = [JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler,
                    PixabayfoundryCrawler,  BossfightCrawler,
