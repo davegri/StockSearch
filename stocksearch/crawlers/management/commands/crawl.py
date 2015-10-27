@@ -886,15 +886,35 @@ class FoodiesfeedCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('p', class_='post-tag')
 
-crawler_classes = [FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class MystockphotosCrawler(Crawler):
+    origin = 'MS'
+    base_url = 'http://mystock.photos/page/{}'
+    domain = 'mystock.photos'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='photo')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='photo').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='photo').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='single_tags')
+
+crawler_classes = [MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler,
-                   PixabayfoundryCrawler, FindaphotoCrawler, BossfightCrawler,
+                   PixabayfoundryCrawler,  BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
-                   PixabayunsplashCrawler, PixabayCrawler, PexelCrawler, MagdeleineCrawler,
-                   FancycraveCrawler, LittlevisualsCrawler, StocksnapCrawler]
+                   PixabayunsplashCrawler, PixabayCrawler, MagdeleineCrawler,
+                   FancycraveCrawler, LittlevisualsCrawler, StocksnapCrawler, PexelCrawler, FindaphotoCrawler,]
 
 def getClass(str):
     for crawler_class in crawler_classes:

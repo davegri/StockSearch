@@ -33,5 +33,6 @@ origins = (
         ('FS','freestocks'),        
         ('TC','travel coffee book'),        
         ('FF','FOODIES FEED'),        
+        ('MS','My Stock Photos'),        
 
 )
