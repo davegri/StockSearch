@@ -947,7 +947,7 @@ class JeshootsCrawler(Crawler):
     def get_tags(self, image_page_soup):
         return image_page_soup.find('h1', class_='entry-title').string,
 
-crawler_classes = [JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+crawler_classes = [IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler,
                    PixabayfoundryCrawler,  BossfightCrawler,
