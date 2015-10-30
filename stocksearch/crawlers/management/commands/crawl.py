@@ -947,7 +947,30 @@ class JeshootsCrawler(Crawler):
     def get_tags(self, image_page_soup):
         return image_page_soup.find('h1', class_='entry-title').string,
 
-crawler_classes = [IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class StokpicCrawler(Crawler):
+    origin = 'SK'
+    base_url = 'http://stokpic.com/page/{}/'
+    domain = 'stokpic.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find('div',class_='et_pb_section_2').find_all('div', class_='has-post-thumbnail')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', class_='et_pb_promo_button')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('meta',{'property':'og:image'})['content']
+
+    def get_tags(self, image_page_soup):
+        tag_list = image_page_soup.find('article', class_='has-post-thumbnail')['class']
+        tags = [tag.replace('project_tag-','').replace('-',' ') for tag in tag_list if tag.startswith('project_tag-')]
+        ignore_words = ['free','stokpic','stock photo','stock photography','stock images', 'commercial photography', 'free images', 'free photos', 'stock photos', 'free stock photos', 'image']
+        return [tag for tag in tags if tag not in ignore_words]
+
+crawler_classes = [StokpicCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler,
                    PixabayfoundryCrawler,  BossfightCrawler,

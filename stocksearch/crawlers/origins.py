@@ -35,5 +35,6 @@ origins = (
         ('FF','FOODIES FEED'),        
         ('MS','My Stock Photos'),
         ('IR','ISO Republic'),   
-        ('JS','jeshoots'),                     
+        ('JS','jeshoots'),        
+        ('SK','Stokpic'),                     
 )
