@@ -13,7 +13,7 @@ from django.conf import settings as djangoSettings
 
 import pdb
 import time
-
+import datetime
 from .origins import origins
 
 
@@ -37,6 +37,7 @@ class Image(models.Model):
     hash = models.CharField(max_length=576)
     hidden = models.BooleanField(default=False)
     clicks = models.IntegerField(default=0)
+    created = models.DateTimeField(default=datetime.datetime.now)
 
     active = ActiveManager()
     objects = models.Manager()
