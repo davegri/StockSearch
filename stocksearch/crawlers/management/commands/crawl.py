@@ -962,7 +962,7 @@ class StokpicCrawler(Crawler):
         return image_page_soup.find('a', class_='et_pb_promo_button')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('meta',{'property':'og:image'})['content']
+        return image_page_soup.find('a', class_='et_pb_promo_button')['href']
 
     def get_tags(self, image_page_soup):
         tag_list = image_page_soup.find('article', class_='has-post-thumbnail')['class']
