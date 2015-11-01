@@ -172,7 +172,7 @@ class PixabayunsplashCrawler(Crawler):
 
 class PixabayfoundryCrawler(Crawler):
     origin = 'PBF'
-    base_url = 'https://pixabay.com/en/users/Foundry-923783/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3AFoundry+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -194,7 +194,7 @@ class PixabayfoundryCrawler(Crawler):
 
 class PixabaymilivanilyCrawler(Crawler):
     origin = 'PBM'
-    base_url = 'https://pixabay.com/en/users/milivanily-742747/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Amilivanily+&image_type=photo&order=latest&cat=&pagi={}'    
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -216,7 +216,7 @@ class PixabaymilivanilyCrawler(Crawler):
 
 class PixabayolichelCrawler(Crawler):
     origin = 'PBO'
-    base_url = 'https://pixabay.com/en/users/Olichel-529835/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Aolichel+&image_type=photo&order=latest&cat=&pagi={}'    
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -238,7 +238,7 @@ class PixabayolichelCrawler(Crawler):
 
 class PixabaymarkusspiskeCrawler(Crawler):
     origin = 'PBMK'
-    base_url = 'https://pixabay.com/en/users/markusspiske-670330/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Amarkusspiske+&image_type=photo&order=latest&cat=&pagi={}'        
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -259,7 +259,7 @@ class PixabaymarkusspiskeCrawler(Crawler):
         return tag_container
 class PixabaytookapicCrawler(Crawler):
     origin = 'PBTP'
-    base_url = 'https://pixabay.com/en/users/tookapic-1386459/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Atookapic+&image_type=photo&order=latest&cat=&pagi={}'            
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -281,7 +281,7 @@ class PixabaytookapicCrawler(Crawler):
 
 class PixabayjillCrawler(Crawler):
     origin = 'PBJ'
-    base_url = 'https://pixabay.com/en/users/jill111-334088/?tab=latest&pagi={}'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Ajill111+&image_type=photo&order=latest&cat=&pagi={}'                
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
