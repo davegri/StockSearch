@@ -216,7 +216,7 @@ class PixabaymilivanilyCrawler(Crawler):
 
 class PixabayolichelCrawler(Crawler):
     origin = 'PBO'
-    base_url = 'https://pixabay.com/en/users/Olichel-529835/?tab=latest&pagi=2'
+    base_url = 'https://pixabay.com/en/users/Olichel-529835/?tab=latest&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -238,7 +238,7 @@ class PixabayolichelCrawler(Crawler):
 
 class PixabaymarkusspiskeCrawler(Crawler):
     origin = 'PBMK'
-    base_url = 'https://pixabay.com/en/users/markusspiske-670330/'
+    base_url = 'https://pixabay.com/en/users/markusspiske-670330/?tab=latest&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -259,7 +259,7 @@ class PixabaymarkusspiskeCrawler(Crawler):
         return tag_container
 class PixabaytookapicCrawler(Crawler):
     origin = 'PBTP'
-    base_url = 'https://pixabay.com/en/users/tookapic-1386459/?tab=latest&pagi=2'
+    base_url = 'https://pixabay.com/en/users/tookapic-1386459/?tab=latest&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -277,7 +277,30 @@ class PixabaytookapicCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
-        return tag_container        
+        return tag_container
+
+class PixabaytookapicCrawler(Crawler):
+    origin = 'PBJ'
+    base_url = 'https://pixabay.com/en/users/jill111-334088/?tab=latest&pagi={}'
+    domain = 'www.pixabay.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='item')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        tag_container = image_page_soup.find('h1')
+        [tag.extract() for tag in tag_container.find_all('a', class_='award')]
+        return tag_container
+        
 class SkitterphotoCrawler(Crawler):
     origin = 'SP'
     base_url = 'http://skitterphoto.com/?page_id=13&paged={}'
