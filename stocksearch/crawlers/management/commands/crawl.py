@@ -962,7 +962,14 @@ class JeshootsCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='item-download').find('a')['href']
+        div = image_page_soup.find('div', class_='item-download')
+        if not div:
+            return image_page_soup.find('div', class_='entry-image').find('img')['src']
+        elif '$' in div.text:
+            print(div.text)
+            raise TypeError
+        else:
+            return div.find('a')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('div', class_='entry-image').find('img')['src']
@@ -993,7 +1000,7 @@ class StokpicCrawler(Crawler):
         ignore_words = ['free','stokpic','stock photo','stock photography','stock images', 'commercial photography', 'free images', 'free photos', 'stock photos', 'free stock photos', 'image']
         return [tag for tag in tags if tag not in ignore_words]
 
-crawler_classes = [IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+crawler_classes = [JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
