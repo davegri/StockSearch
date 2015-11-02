@@ -36,5 +36,6 @@ origins = (
         ('MS','My Stock Photos'),
         ('IR','ISO Republic'),   
         ('JS','jeshoots'),        
-        ('SK','Stokpic'),                     
+        ('SK','Stokpic'),   
+        ('JH','Joshua Hibbert'),                                               
 )

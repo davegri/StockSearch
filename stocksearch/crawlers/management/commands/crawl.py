@@ -1000,7 +1000,35 @@ class StokpicCrawler(Crawler):
         ignore_words = ['free','stokpic','stock photo','stock photography','stock images', 'commercial photography', 'free images', 'free photos', 'stock photos', 'free stock photos', 'image']
         return [tag for tag in tags if tag not in ignore_words]
 
-crawler_classes = [JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class JoshuahibbertCrawler(Crawler):
+    origin = 'JH'
+    base_url = 'http://photos.joshnh.com/page/{}'
+    domain = 'photos.joshnh.com'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('article', class_='photo')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('a', text=re.compile('^Download$', re.IGNORECASE))['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='photo-wrapper').find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('section', class_='has-tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find_all('a', class_='permalink')[1]['href']
+
+    def get_tags(self, image_page_soup):
+        tags_container = self.get_tags_container(image_page_soup)
+        tag_links = tags_container.find_all('a')
+        tag_names = [tag_link.text for tag_link in tag_links]
+        return tag_names
+
+crawler_classes = [JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
