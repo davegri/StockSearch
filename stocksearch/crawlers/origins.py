@@ -37,5 +37,6 @@ origins = (
         ('IR','ISO Republic'),   
         ('JS','jeshoots'),        
         ('SK','Stokpic'),   
-        ('JH','Joshua Hibbert'),                                               
+        ('JH','Joshua Hibbert'),
+        ('MI','minimography'),                                               
 )

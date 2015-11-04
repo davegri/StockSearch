@@ -1028,7 +1028,28 @@ class JoshuahibbertCrawler(Crawler):
         tag_names = [tag_link.text for tag_link in tag_links]
         return tag_names
 
-crawler_classes = [JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class MinimographyCrawler(Crawler):
+    origin = 'MI'
+    base_url = 'http://minimography.com/page/{}/'
+    domain = 'minimography.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('article', class_='has-post-thumbnail')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('a')['href']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('img')['src']
+
+    def get_tags(self, image_page_soup):
+        tags = image_page_soup.find_all('meta', {'property':'article:tag'})
+        return [tag['content'] for tag in tags]
+
+crawler_classes = [MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
