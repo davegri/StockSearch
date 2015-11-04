@@ -904,7 +904,7 @@ class FoodiesfeedCrawler(Crawler):
         return image_page_soup.find('div', class_='wpdm-link-tpl')['data-durl']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='entry').find('p').find('img')['src']
+        return image_page_soup.find('img', class_=re.compile(r'wp-image-'))['src']
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('p', class_='post-tag')
