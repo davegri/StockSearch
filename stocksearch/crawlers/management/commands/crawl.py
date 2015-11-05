@@ -43,7 +43,7 @@ class PexelCrawler(Crawler):
 
 class MagdeleineCrawler(Crawler):
     origin = 'MG'
-    base_url = 'http://magdeleine.co/browse/page/{}/'
+    base_url = 'http://magdeleine.co/license/cc0/page/{}/'
     domain = 'www.magdeleine.co'
     def __init__(self, db_record=None):
 
