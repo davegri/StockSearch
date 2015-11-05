@@ -12,9 +12,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         images = Image.objects.filter(origin='TP')
         deleted = 0
-        for image in images:
+        for i, image in enumerate(images):
             response = requests.get(image.page_url)
             if 'This is a premium photo' in response.text:
                 image.delete()
                 deleted +=1
-        print('deleted '+deleted+' photos from tookapic')
+                print('deleted '+deleted+' photos from tookapic')
+            print('checking photo {} of {}'.format(i+1,len(images)))
