@@ -150,9 +150,9 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         #                              select_params=[image.hash,image.hash]).exclude(hash="").distinct()
     else:
         if query:
-            images = watson.filter(queryset, query)
+            images = watson.filter(queryset, query).distinct()
         else:
-            images = watson.filter(queryset, query).order_by('-id')
+            images = watson.filter(queryset, query).order_by('-id').distinct()
     
     amount = images.count()
     images = images.prefetch_related('tags')[(per_page*page_num)-per_page:per_page*page_num]
