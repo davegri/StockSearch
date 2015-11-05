@@ -17,5 +17,5 @@ class Command(BaseCommand):
             if 'This is a premium photo' in response.text:
                 image.delete()
                 deleted +=1
-                print('deleted '+deleted+' photos from tookapic')
+                print('deleted {} photos from tookapic'.format(deleted))
             print('checking photo {} of {}'.format(i+1,len(images)))
