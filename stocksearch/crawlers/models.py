@@ -60,7 +60,7 @@ class Image(models.Model):
             if  not image_url:
                 image_url = self.source_url
             headers = {
-                'User-Agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)',
+                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
             }
             for i in range(5):
                 try:

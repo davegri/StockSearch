@@ -14,7 +14,6 @@ class Command(BaseCommand):
         deleted = 0
         for i, image in enumerate(images):
             response = requests.get(image.page_url)
-            response.raise_for_status()
             if 'This is a premium photo' in response.text:
                 image.delete()
                 deleted +=1
