@@ -78,7 +78,7 @@ class Crawler():
 
     def get_page_soup(self, page_url, attempts=5, delay=2):
         headers = {
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
+            'User-Agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)',
         }
         for i in range(attempts):
             try:
