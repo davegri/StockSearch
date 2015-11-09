@@ -150,7 +150,7 @@ def get_images_paginated(query, origins, page_num, last_id=None):
         #                              select_params=[image.hash,image.hash]).exclude(hash="").distinct()
     else:
         if query:
-            images = watson.filter(queryset, query).distinct()
+            images = watson.filter(queryset, query).order_by('-clicks').distinct()
         else:
             images = watson.filter(queryset, query).order_by('-id').distinct()
     
