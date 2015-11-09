@@ -301,6 +301,27 @@ class PixabayjillCrawler(Crawler):
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
         return tag_container
 
+class PixabayryanCrawler(Crawler):
+    origin = 'PBR'
+    base_url = 'https://pixabay.com/en/photos/?q=user%3ARyanMcGuire+&image_type=photo&order=latest&cat=&pagi={}'                
+    domain = 'www.pixabay.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='item')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+
+    def get_tags_container(self, image_page_soup):
+        tag_container = image_page_soup.find('h1')
+        [tag.extract() for tag in tag_container.find_all('a', class_='award')]
+        return tag_container
 class SkitterphotoCrawler(Crawler):
     origin = 'SP'
     base_url = 'http://skitterphoto.com/?page_id=13&paged={}'
@@ -1055,7 +1076,7 @@ crawler_classes = [MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, I
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
                    FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
-                   PixabayunsplashCrawler, PixabayCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler, PixabayjillCrawler,
+                   PixabayryanCrawler, PixabayunsplashCrawler, PixabayCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler, PixabayjillCrawler,
                    PixabayfoundryCrawler, MagdeleineCrawler,
                    FancycraveCrawler, LittlevisualsCrawler, StocksnapCrawler, PexelCrawler, FindaphotoCrawler,]
 
