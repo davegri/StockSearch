@@ -101,11 +101,14 @@ class Image(models.Model):
             os.remove(file_path)
             return True
 
-
+class Url(models.Model):
+    url = models.URLField(max_length=400)
+    
 class Crawler(models.Model):
     origin = models.CharField(choices=origins, max_length=2)
     current_page = models.IntegerField(default=1)
     images_scraped = models.IntegerField(default=0)
+    visited_urls = models.ManyToManyField(Url)
 
     def __str__(self):
         return self.get_origin_display()+" Crawler"

@@ -1,7 +1,7 @@
 from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
-from crawlers.models import Image, Tag, Crawler as CrawlerModel
+from crawlers.models import Image, Tag, Url, Crawler as CrawlerModel
 from requests.exceptions import HTTPError
 import pdb
 import signal
@@ -48,7 +48,7 @@ class Crawler():
         """
         self.origin = origin
         if not db_record:
-            db_record = CrawlerModel(origin=self.origin)
+            db_record, created = CrawlerModel.objects.get_or_create(origin=self.origin)
         self.current_page = db_record.current_page
         self.db_record = db_record
         self.base_url = base_url
@@ -76,7 +76,7 @@ class Crawler():
         url = url.replace('http://www.', '')
         return url
 
-    def get_page_soup(self, page_url, attempts=5, delay=2):
+    def request_url(self, page_url, attempts=5, delay=3):
         headers = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
         }
@@ -88,10 +88,13 @@ class Crawler():
                 print (RED.format("page responded with "+str(response.status_code)+". trying again"+str(page_url)))
                 time.sleep(delay)
             else:
-                return BeautifulSoup(response.text)
+                return response
         else:
             # failed to get the page raise an exception
             response.raise_for_status()
+
+    def get_page_soup(self, response):
+        return BeautifulSoup(response.text)
 
     def get_image_page_urls(self, page_soup):
         """
@@ -112,7 +115,7 @@ class Crawler():
         signal.signal(signal.SIGINT, signal_handler)
         images_added = 0
         images_failed = 0
-
+        visited_page_urls = []
         if start_page:
             self.current_page=start_page
 
@@ -121,25 +124,28 @@ class Crawler():
                 if interrupted:
                     self.terminate_message()
                     return
-
                 print('crawling page {}'.format(self.current_page))
                 current_page_url = self.base_url.format(self.current_page)
                 if self.current_page == 1 and self.first_page_url:
                     current_page_url = self.first_page_url
-                current_page_soup = self.get_page_soup(current_page_url)
-
+                current_page_response = self.request_url(current_page_url)
+                current_page_url = current_page_response.url
+                current_page_soup = self.get_page_soup(current_page_response)
+                if current_page_url in visited_page_urls:
+                    raise HTTPError
+                visited_page_urls.append(current_page_url)
                 if self.nested_scrape:
                     image_page_urls = self.get_image_page_urls(current_page_soup)
                     for n,image_page_url in enumerate(image_page_urls):
                         print('crawling image at: {} (image {} of {})'.format(image_page_url, n+1, len(image_page_urls)))
-                        if Image.objects.filter(page_url__icontains=self.strip_protocol(image_page_url)).exists():
+                        if self.image_exists(image_page_url):
                             print("Image already exists in database, moving on")
                             if not full_crawl:
                                 self.terminate_message()
                                 return
                             continue
                         try:
-                            image_page_soup = self.get_page_soup(image_page_url)
+                            image_page_soup = self.get_page_soup(self.request_url(image_page_url))
                         except HTTPError:
                             print(RED.format("Failed to reach image page url at: {} , moving on".format(image_page_url)))
                             self.images_failed+=1
@@ -175,6 +181,8 @@ class Crawler():
         print(BLUE.format("{} images already existed from another website".format(self.images_failed)))
         print(RED.format("{} images failed to add".format(self.images_failed)))
 
+    def image_exists(self, image_page_url):
+        return Image.objects.filter(page_url__icontains=self.strip_protocol(image_page_url)).exists() or self.db_record.visited_urls.filter(url__icontains=self.strip_protocol(image_page_url)).exists()
 
     def scrape_image(self, image_container_soup, image_page_url=None):
         print('getting image source url')
@@ -187,10 +195,14 @@ class Crawler():
         # if no page url is supplied use source url as page url
         if image_page_url is None:
             image_page_url = image_source_url    
-        # check if page url exists
-        if Image.objects.filter(page_url__icontains=self.strip_protocol(image_page_url)).exists():
+        # check if image page url exists
+        if self.image_exists(image_page_url):
             print("Image already exists in database, moving on")
             raise ImageAlreadyExists
+        # save image page url as a visited url in the db_record for the crawler
+        url = Url(url=image_page_url)
+        url.save()
+        self.db_record.visited_urls.add(url)
 
         print('getting image thumbnail url')
         try:
