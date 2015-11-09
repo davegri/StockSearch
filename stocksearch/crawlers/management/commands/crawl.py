@@ -1074,7 +1074,7 @@ crawler_classes = [MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, I
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
-                   FreenaturestockCrawler, MmtCrawler, JaymantriCrawler, LibreshotCrawler,
+                   FreenaturestockCrawler, MmtCrawler, JaymantriCrawler,
                    PicjumboCrawler, KaboompicsCrawler, TookapicCrawler, SkitterphotoCrawler,
                    PixabayryanCrawler, PixabayunsplashCrawler, PixabayCrawler, PixabayolichelCrawler, PixabaymilivanilyCrawler, PixabaytookapicCrawler, PixabayjillCrawler,
                    PixabayfoundryCrawler, MagdeleineCrawler,
