@@ -647,7 +647,7 @@ class SplitshireCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('div', class_='featured_img')
+        containers = page_soup.find_all('article', class_='format-image')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
