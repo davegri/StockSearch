@@ -1095,7 +1095,7 @@ class Command(BaseCommand):
             default=False,
             help='Trigger a full crawl that keeps going even if it finds existing images')
         parser.add_argument('origin', nargs='*')
-        parser.add_argument('--page')
+        parser.add_argument('--page',default=1)
 
     def handle(self, *args, **options):
         global crawler_classes
