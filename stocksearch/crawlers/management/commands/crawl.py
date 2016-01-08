@@ -876,7 +876,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find_all('div', class_='img-wrap')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download)['href']
+        return image_page_soup.find('a', class_='download')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('img')['src']
