@@ -564,7 +564,7 @@ class GoodstockphotosCrawler(Crawler):
         return image_page_soup.find('a', class_='button')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return "http://"+image_page_soup.find('div', class_='entry-content').find('img')['src'].replace("//","")
+        return "http://"+image_page_soup.find('main', class_='content').find('img')['src'].replace("//","")
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('span', class_='entry-tags') 
