@@ -1103,7 +1103,7 @@ class Command(BaseCommand):
             crawler_classes = [getClass(origin) for origin in options['origin']]
         crawlers = [crawler_class() for crawler_class in crawler_classes]
         full_crawl = options['full_crawl']
-        page = options['page']
+        page = int(options['page'])
         for crawler in crawlers:
             crawler.crawl(full_crawl=full_crawl,start_page=page)
 
