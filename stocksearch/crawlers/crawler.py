@@ -103,9 +103,7 @@ class Crawler():
         image_page_links = self.get_image_page_links(page_soup)
         if not image_page_links: raise ImageURLsNotFound
         try:
-            image_page_urls = [ link['href'] for link in image_page_links]
-        except TypeError:
-            print(RED.format('Failed to get url from link, moving on'))
+            image_page_urls = [ link['href'] for link in image_page_links if link]
         # make sure urls are absolute
         image_page_urls = [self.make_absolute_url(url) for url in image_page_urls]
         return image_page_urls
