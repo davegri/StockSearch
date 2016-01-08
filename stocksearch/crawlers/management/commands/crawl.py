@@ -885,7 +885,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find('p', class_='tags')
 
     def get_image_page_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download)['href']
+        return image_page_soup.find('a', class_='download')['href']
 
 class TravelcoffeebookCrawler(Crawler):
     origin = 'TC'
