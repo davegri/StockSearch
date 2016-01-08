@@ -873,10 +873,10 @@ class FreestocksCrawler(Crawler):
             Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
 
     def get_image_containers(self, image_page_soup):
-        return image_page_soup.find_all('article', class_='post')
+        return image_page_soup.find_all('div', class_='img-wrap')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a')['href']
+        return image_page_soup.find('a', class_='download)['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('img')['src']
@@ -885,7 +885,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find('p', class_='tags')
 
     def get_image_page_url(self, image_page_soup):
-        return image_page_soup.find('a')['href']
+        return image_page_soup.find('a', class_='download)['href']
 
 class TravelcoffeebookCrawler(Crawler):
     origin = 'TC'
