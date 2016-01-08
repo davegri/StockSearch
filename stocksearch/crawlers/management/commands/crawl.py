@@ -641,13 +641,13 @@ class NegativespaceCrawler(Crawler):
 
 class SplitshireCrawler(Crawler):
     origin = 'SH'
-    base_url = 'http://www.splitshire.com/page/{}/'
-    domain = 'www.splitshire.co'
+    base_url = 'http://www.splitshire.com/page/{}/?s'
+    domain = 'www.splitshire.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('article', class_='format-image')
+        containers = page_soup.find_all('article', class_='post-format-image')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
