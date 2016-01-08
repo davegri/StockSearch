@@ -138,10 +138,10 @@ class PixabayCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -160,10 +160,10 @@ class PixabayunsplashCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -182,10 +182,10 @@ class PixabayfoundryCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -204,10 +204,10 @@ class PixabaymilivanilyCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -226,10 +226,10 @@ class PixabayolichelCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -248,10 +248,10 @@ class PixabaymarkusspiskeCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -269,10 +269,10 @@ class PixabaytookapicCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -291,10 +291,10 @@ class PixabayjillCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
@@ -313,10 +313,10 @@ class PixabayryanCrawler(Crawler):
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img', class_='pure-img')['src'])
+        return self.make_absolute_url(image_page_soup.find('img', {'itemprop':'contentURL'})['src'])
 
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
