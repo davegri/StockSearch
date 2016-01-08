@@ -543,7 +543,7 @@ class BarnimagesCrawler(Crawler):
         return image_page_soup.find('a', class_='download-button')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='entry-content').find('img')['src']
+        return image_page_soup.find('div', class_='entry-content').find('img')['srcset'].split(',')[0]
 
     def get_tags(self, image_page_soup):
         tags = image_page_soup.find_all('meta', {'property':'article:tag'})
@@ -876,7 +876,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find_all('div', class_='img-wrap')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download')['href']
+        return image_page_soup.find('a', class_='download)['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('img')['src']
