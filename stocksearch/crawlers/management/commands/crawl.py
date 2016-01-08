@@ -530,20 +530,20 @@ class FreelyphotosCrawler(Crawler):
 
 class BarnimagesCrawler(Crawler):
     origin = 'BI'
-    base_url = 'http://barnimages.com/page/{}'
+    base_url = 'http://barnimages.com/images/page/{}/'
     domain = 'www.barnimages.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('div', class_='post-img')
+        containers = page_soup.find_all('article', class_='format-image')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download-link')['href']
+        return image_page_soup.find('a', class_='download-button')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='post-entry').find('img')['src']
+        return image_page_soup.find('div', class_='entry-content').find('img')['src']
 
     def get_tags(self, image_page_soup):
         tags = image_page_soup.find_all('meta', {'property':'article:tag'})
@@ -876,7 +876,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find_all('div', class_='img-wrap')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download')['href']
+        return image_page_soup.find('a', class_='download)['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('img')['src']
