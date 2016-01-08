@@ -876,7 +876,7 @@ class FreestocksCrawler(Crawler):
         return image_page_soup.find_all('div', class_='img-wrap')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download')['href']
+        return image_page_soup.find('a', class_='download') ['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
         return image_page_soup.find('img')['src']
@@ -1095,6 +1095,7 @@ class Command(BaseCommand):
             default=False,
             help='Trigger a full crawl that keeps going even if it finds existing images')
         parser.add_argument('origin', nargs='*')
+        parser.add_argument('--page')
 
     def handle(self, *args, **options):
         global crawler_classes
@@ -1102,8 +1103,9 @@ class Command(BaseCommand):
             crawler_classes = [getClass(origin) for origin in options['origin']]
         crawlers = [crawler_class() for crawler_class in crawler_classes]
         full_crawl = options['full_crawl']
+        page = options['page']
         for crawler in crawlers:
-            crawler.crawl(full_crawl=full_crawl)
+            crawler.crawl(full_crawl=full_crawl,start_page=page)
 
 
 
