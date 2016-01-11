@@ -1071,7 +1071,7 @@ class MinimographyCrawler(Crawler):
         return [tag['content'] for tag in tags]
 
 class PicklejarCrawler(Crawler):
-    origin = 'PJ'
+    origin = 'IJ'
     base_url = 'http://picklejar.in/page/{}/'
     domain = 'picklejar.in'
     def __init__(self, db_record=None):
