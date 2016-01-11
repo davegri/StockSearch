@@ -1070,7 +1070,30 @@ class MinimographyCrawler(Crawler):
         tags = image_page_soup.find_all('meta', {'property':'article:tag'})
         return [tag['content'] for tag in tags]
 
-crawler_classes = [MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+class PicklejarCrawler(Crawler):
+    origin = 'PJ'
+    base_url = 'http://picklejar.in/page/{}/'
+    domain = 'picklejar.in'
+    def __init__(self, db_record=None):
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('article', class_='image')
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img')['src']
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find_all('a')['href']
+
+
+crawler_classes = [PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,

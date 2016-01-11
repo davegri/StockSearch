@@ -39,4 +39,6 @@ origins = (
         ('SK','Stokpic'),   
         ('JH','Joshua Hibbert'),
         ('MI','minimography'),                                               
+        ('IJ','Pickle Jar'),                                               
+
 )
