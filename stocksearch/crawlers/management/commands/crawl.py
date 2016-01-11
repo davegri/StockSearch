@@ -1090,7 +1090,7 @@ class PicklejarCrawler(Crawler):
         return image_page_soup.find('div', class_='tags')
 
     def get_image_page_url(self, image_page_soup):
-        return image_page_soup.find_all('a')['href']
+        return image_page_soup.find('a')['href']
 
 
 crawler_classes = [PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
