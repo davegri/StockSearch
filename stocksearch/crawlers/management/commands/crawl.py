@@ -1081,10 +1081,10 @@ class PicklejarCrawler(Crawler):
         return image_page_soup.find_all('article', class_='image')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('img')['srcset'].split(',')[0]
+        return image_page_soup.find('img')['srcset'].split(',')[0].split(' ')[1]
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('img')['srcset'].split(',')[0]
+        return image_page_soup.find('img')['srcset'].split(',')[0].split(' ')[1]
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
