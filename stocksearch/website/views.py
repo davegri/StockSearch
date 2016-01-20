@@ -10,7 +10,7 @@ from django.http import Http404, JsonResponse, HttpResponse
 from time import sleep;
 import operator
 import re
-import watson
+from watson import search as watson
 import distance
 import pdb
 from django.views.decorators.csrf import ensure_csrf_cookie

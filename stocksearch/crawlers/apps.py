@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-import watson
+from watson import search as watson
 
 class CrawlersConfig(AppConfig):
     name = "crawlers"
