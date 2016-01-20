@@ -612,7 +612,7 @@ class PicographyCrawler(Crawler):
         return image_page_soup.find('a', text='Download')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='photoBox').find('img')['src']
+        return "http://"+image_page_soup.find('div', class_='photoBox').find('img')['src'][2:]
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('ul', class_='hd-labels') 
