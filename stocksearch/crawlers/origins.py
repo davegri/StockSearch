@@ -40,5 +40,6 @@ origins = (
         ('JH','Joshua Hibbert'),
         ('MI','minimography'),                                               
         ('IJ','Pickle Jar'),                                               
+        ('AI','alana.io'),                                               
 
 )
