@@ -641,22 +641,20 @@ class NegativespaceCrawler(Crawler):
 
 class SplitshireCrawler(Crawler):
     origin = 'SH'
-    base_url = 'http://www.splitshire.com/page/{}/?s'
+    base_url = 'http://www.splitshire.com/recent-photos/page/{}/'
     domain = 'www.splitshire.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('article', class_='post-format-image')
+        containers = page_soup.find_all('div', class_='post-image')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('meta', {'property':'og:image'})['content']
+        return image_page_soup.find('img', class_='wp-post-image')['src']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        if 'Video' in image_page_soup.title.string:
-            raise AttributeError
-        return image_page_soup.find('meta', {'property':'og:image'})['content']
+        return image_page_soup.find('img', class_='wp-post-image')['src']
 
     def get_tags(self, image_page_soup):
         tags = image_page_soup.find_all('meta', {'property':'article:tag'})
