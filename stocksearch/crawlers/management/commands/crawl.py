@@ -1126,7 +1126,9 @@ class PicallsCrawler(Crawler):
         return image_page_soup.find('img', class_='imagen-single')['src']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('img', class_='imagen-single')['src']
+        prefix = 'http://picalls.com/wp-content/themes/picalls/timthumb.php?src='
+        suffix = '&h=500&zc=1'
+        return prefix + image_page_soup.find('img', class_='imagen-single')['src'] + suffix
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
