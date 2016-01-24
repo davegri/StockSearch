@@ -930,23 +930,23 @@ class FoodiesfeedCrawler(Crawler):
 
 class MystockphotosCrawler(Crawler):
     origin = 'MS'
-    base_url = 'http://mystock.photos/page/{}'
+    base_url = 'http://mystock.photos/page/{}/?s'
     domain = 'mystock.photos'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('div', class_='photo')
+        containers = page_soup.find_all('article', class_='post')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='photo').find('a')['href']
+        return image_page_soup.find('a', class_='download_link')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='photo').find('img')['src']
+        return image_page_soup.find('img', class_='wp-post-image')['src']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('div', class_='single_tags')
+        return image_page_soup.find('span', class_='tags-links')
 
 class IsorepublicCrawler(Crawler):
     origin = 'IR'
