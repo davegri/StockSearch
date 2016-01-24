@@ -41,5 +41,5 @@ origins = (
         ('MI','minimography'),                                               
         ('IJ','Pickle Jar'),                                               
         ('AI','alana.io'),                                               
-
+        ('PA','picalls'),                                               
 )

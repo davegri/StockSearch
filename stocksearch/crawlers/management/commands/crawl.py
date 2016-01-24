@@ -1111,8 +1111,27 @@ class AlanaioCrawler(Crawler):
         tags = image_page_soup.find_all('a', {'rel':'tag'})
         return [tag.text for tag in tags]
 
+class PicallsCrawler(Crawler):
+    origin = 'PA'
+    base_url = 'http://picalls.com/free-images/page/{}'
+    domain = 'picalls.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
-crawler_classes = [AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('article', class_='post')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='imagen-single')['src']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='imagen-single')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('div', class_='tags')
+
+crawler_classes = [PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
