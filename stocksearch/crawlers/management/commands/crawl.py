@@ -29,7 +29,7 @@ class PexelCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        article_tags = page_soup.select('article.photos__photo')
+        article_tags = page_soup.select('article.photo-item')
         return [article.find('a') for article in article_tags]
 
     def get_image_source_url(self, image_page_soup):
@@ -79,7 +79,7 @@ class FancycraveCrawler(Crawler):
         return image_page_soup.find('div', class_='pxu-photo').find('img')['src']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('div', class_='tags') 
+        return image_page_soup.find('div', class_='tags')
 
 class LittlevisualsCrawler(Crawler):
     origin = 'LV'
@@ -123,7 +123,7 @@ class StocksnapCrawler(Crawler):
         return image_page_soup.find('img', class_='img-photo')['src']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('table', class_='img-details') 
+        return image_page_soup.find('table', class_='img-details')
 
 class PixabayCrawler(Crawler):
     origin = 'PB'
@@ -190,11 +190,11 @@ class PixabayfoundryCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
-        return tag_container        
+        return tag_container
 
 class PixabaymilivanilyCrawler(Crawler):
     origin = 'PBM'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3Amilivanily+&image_type=photo&order=latest&cat=&pagi={}'    
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Amilivanily+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -212,11 +212,11 @@ class PixabaymilivanilyCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
-        return tag_container       
+        return tag_container
 
 class PixabayolichelCrawler(Crawler):
     origin = 'PBO'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3Aolichel+&image_type=photo&order=latest&cat=&pagi={}'    
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Aolichel+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -234,11 +234,11 @@ class PixabayolichelCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         tag_container = image_page_soup.find('h1')
         [tag.extract() for tag in tag_container.find_all('a', class_='award')]
-        return tag_container       
+        return tag_container
 
 class PixabaymarkusspiskeCrawler(Crawler):
     origin = 'PBMK'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3Amarkusspiske+&image_type=photo&order=latest&cat=&pagi={}'        
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Amarkusspiske+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -259,7 +259,7 @@ class PixabaymarkusspiskeCrawler(Crawler):
         return tag_container
 class PixabaytookapicCrawler(Crawler):
     origin = 'PBTP'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3Atookapic+&image_type=photo&order=latest&cat=&pagi={}'            
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Atookapic+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -281,7 +281,7 @@ class PixabaytookapicCrawler(Crawler):
 
 class PixabayjillCrawler(Crawler):
     origin = 'PBJ'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3Ajill111+&image_type=photo&order=latest&cat=&pagi={}'                
+    base_url = 'https://pixabay.com/en/photos/?q=user%3Ajill111+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -303,7 +303,7 @@ class PixabayjillCrawler(Crawler):
 
 class PixabayryanCrawler(Crawler):
     origin = 'PBR'
-    base_url = 'https://pixabay.com/en/photos/?q=user%3ARyanMcGuire+&image_type=photo&order=latest&cat=&pagi={}'                
+    base_url = 'https://pixabay.com/en/photos/?q=user%3ARyanMcGuire+&image_type=photo&order=latest&cat=&pagi={}'
     domain = 'www.pixabay.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, "PB", self.base_url, self.domain)
@@ -526,7 +526,7 @@ class FreelyphotosCrawler(Crawler):
         return image_page_soup.find('div', class_='wrapper').find('img')['src']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('li', class_='post-tags') 
+        return image_page_soup.find('li', class_='post-tags')
 
 class BarnimagesCrawler(Crawler):
     origin = 'BI'
@@ -567,7 +567,7 @@ class GoodstockphotosCrawler(Crawler):
         return "http://"+image_page_soup.find('main', class_='content').find('img')['src'].replace("//","")
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('span', class_='entry-tags') 
+        return image_page_soup.find('span', class_='entry-tags')
 
 
 class FindaphotoCrawler(Crawler):
@@ -596,7 +596,7 @@ class FindaphotoCrawler(Crawler):
         return self.make_absolute_url(image_page_soup.find('div', class_='image-detail-image-container').find('img')['src'])
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('div', class_='image-detail-tags') 
+        return image_page_soup.find('div', class_='image-detail-tags')
 
 class PicographyCrawler(Crawler):
     origin = 'PG'
@@ -615,7 +615,7 @@ class PicographyCrawler(Crawler):
         return "http://"+image_page_soup.find('div', class_='photoBox').find('img')['src'][2:]
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('ul', class_='hd-labels') 
+        return image_page_soup.find('ul', class_='hd-labels')
 
 class NegativespaceCrawler(Crawler):
     origin = 'NS'
@@ -893,7 +893,7 @@ class TravelcoffeebookCrawler(Crawler):
             Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
 
     def get_image_containers(self, image_page_soup):
-        return image_page_soup.find_all(lambda tag: tag.name == 'div' and 
+        return image_page_soup.find_all(lambda tag: tag.name == 'div' and
                                    tag.get('class') == ['post'])
 
     def get_image_source_url(self, image_page_soup):
@@ -1133,7 +1133,7 @@ class PicallsCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
 
-crawler_classes = [PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler, 
+crawler_classes = [PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    GoodstockphotosCrawler, BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
@@ -1169,6 +1169,3 @@ class Command(BaseCommand):
         page = int(options['page'])
         for crawler in crawlers:
             crawler.crawl(full_crawl=full_crawl,start_page=page)
-
-
-
