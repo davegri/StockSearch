@@ -64,22 +64,26 @@ class MagdeleineCrawler(Crawler):
 class FancycraveCrawler(Crawler):
     origin = 'FC'
     base_url = 'http://fancycrave.com/page/{}'
-    domain = 'www.fancycrave.com'
+    domain = 'fancycrave.com'
     def __init__(self, db_record=None):
 
-        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
 
-    def get_image_page_links(self, page_soup):
-        return page_soup.select('a.timestamp')
+    def get_image_containers(self, image_page_soup):
+        return image_page_soup.find_all('article', class_='type-photo')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', text='Download')['href']
+        return image_page_soup.find('img')['src']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', class_='pxu-photo').find('img')['src']
+        return image_page_soup.find('img')['src']
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
+
+    def get_image_page_url(self, image_page_soup):
+        return image_page_soup.find('aside', class_='metadata')['data-permalink']
+
 
 class LittlevisualsCrawler(Crawler):
     origin = 'LV'
