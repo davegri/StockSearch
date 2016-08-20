@@ -65,6 +65,7 @@ class Image(models.Model):
             for i in range(5):
                 try:
                     r = requests.get(image_url, stream=True, headers=headers)
+                    r.raw.decode_content = True # handle spurious Content-Encoding
                 except requests.exceptions.ConnectionError:
                     print("error loading image url, connection error")
                     break

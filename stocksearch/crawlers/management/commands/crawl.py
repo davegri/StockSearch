@@ -328,7 +328,7 @@ class PixabayryanCrawler(Crawler):
         return tag_container
 class SkitterphotoCrawler(Crawler):
     origin = 'SP'
-    base_url = 'http://skitterphoto.com/?page_id=13&paged={}'
+    base_url = 'http://skitterphoto.com/?page_id=177132&paged={}'
     domain = 'www.skitterphoto.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
@@ -388,7 +388,7 @@ class KaboompicsCrawler(Crawler):
 
 class PicjumboCrawler(Crawler):
     origin = 'PJ'
-    base_url = 'https://picjumbo.com/page/{}/'
+    base_url = 'https://picjumbo.com/latest-free-stock-photos/page/{}/'
     domain = 'www.picjumbo.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
@@ -406,7 +406,7 @@ class PicjumboCrawler(Crawler):
         return image_page_soup.find('a', class_='button')['href']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('div', class_='browse_more')
+        return image_page_soup.find('div', class_='tags')
 
 class LibreshotCrawler(Crawler):
     origin = 'LS'
@@ -450,8 +450,8 @@ class JaymantriCrawler(Crawler):
 
 class MmtCrawler(Crawler):
     origin = 'MT'
-    base_url = 'http://mmt.li/page/{}/'
-    domain = 'www.mmt.li'
+    base_url = 'http://mmtstock.com/page/{}/'
+    domain = 'mmtstock.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
 
@@ -459,10 +459,10 @@ class MmtCrawler(Crawler):
         return image_page_soup.find_all('article', class_='post')
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a')['href']
+        return image_page_soup.find('img')['src']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('a')['href']
+        return image_page_soup.find('img')['src']
 
     def get_image_page_url(self, image_page_soup):
         return image_page_soup.find('a')['href']
@@ -872,22 +872,20 @@ class FreestocksCrawler(Crawler):
     base_url = 'http://freestocks.org/page/{}/'
     domain = 'freestocks.org'
     def __init__(self, db_record=None):
-            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain, nested_scrape=False)
+            Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
-    def get_image_containers(self, image_page_soup):
-        return image_page_soup.find_all('div', class_='img-wrap')
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('div', class_='img-wrap')
+        return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download') ['href']
+        return image_page_soup.find('div', class_='img-wrap').find('img')['src']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('img')['src']
+        return image_page_soup.find('div', class_='img-wrap').find('img')['src']
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('p', class_='tags')
-
-    def get_image_page_url(self, image_page_soup):
-        return image_page_soup.find('a', class_='download')['href']
 
 class TravelcoffeebookCrawler(Crawler):
     origin = 'TC'
