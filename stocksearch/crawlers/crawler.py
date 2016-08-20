@@ -121,9 +121,6 @@ class Crawler():
 
         try:
             while True:
-                if interrupted:
-                    self.terminate_message()
-                    return
                 print('crawling page {}'.format(self.current_page))
                 current_page_url = self.base_url.format(self.current_page)
                 if self.current_page == 1 and self.first_page_url:
@@ -137,6 +134,9 @@ class Crawler():
                 if self.nested_scrape:
                     image_page_urls = self.get_image_page_urls(current_page_soup)
                     for n,image_page_url in enumerate(image_page_urls):
+                        if interrupted:
+                            self.terminate_message()
+                            return
                         print('crawling image at: {} (image {} of {})'.format(image_page_url, n+1, len(image_page_urls)))
                         if self.image_exists(image_page_url):
                             print("Image already exists in database, moving on")
@@ -155,6 +155,9 @@ class Crawler():
                     image_containers = self.get_image_containers(current_page_soup)
                     if not image_containers: raise ImageContainersNotFound
                     for n, container in enumerate(image_containers):
+                        if interrupted:
+                            self.terminate_message()
+                            return
                         print('crawling images on page: {} (image {} of {})'.format(current_page_url, n+1, len(image_containers)))
                         try:
                             self.scrape_image(container, self.get_image_page_url(container))
