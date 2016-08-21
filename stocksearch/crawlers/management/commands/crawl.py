@@ -347,7 +347,7 @@ class SkitterphotoCrawler(Crawler):
 
 class TookapicCrawler(Crawler):
     origin = 'TP'
-    base_url = 'https://stock.tookapic.com/?filter=free&page={}'
+    base_url = 'https://stock.tookapic.com/photos?filter=free&list=curated&page={}'
     domain = 'www.stock.tookapic.com'
     def __init__(self, db_record=None):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
@@ -362,7 +362,7 @@ class TookapicCrawler(Crawler):
         return image_page_soup.find(lambda x: x.has_attr('data-src'))['data-src']
 
     def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('div', class_='c-list-tag')
+        return image_page_soup.find('div', class_='mt- u-nano')
 
 class KaboompicsCrawler(Crawler):
     origin = 'KP'
