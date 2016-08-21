@@ -830,7 +830,7 @@ class CreativevixCrawler(Crawler):
         return self.make_absolute_url(image_page_soup.find('a',text="Download")['href'])
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return self.make_absolute_url(image_page_soup.find('img')['data-src'])
+        return self.make_absolute_url(image_page_soup.find('img')['src'])
 
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
@@ -1135,7 +1135,7 @@ class PicallsCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='tags')
 
-crawler_classes = [PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, CreativevixCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
+crawler_classes = [PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
@@ -1161,6 +1161,7 @@ class Command(BaseCommand):
             help='Trigger a full crawl that keeps going even if it finds existing images')
         parser.add_argument('origin', nargs='*')
         parser.add_argument('--page',default=1)
+        parser.add_argument('--test',action='store_true',default=False)
 
     def handle(self, *args, **options):
         global crawler_classes
@@ -1168,6 +1169,7 @@ class Command(BaseCommand):
             crawler_classes = [getClass(origin) for origin in options['origin']]
         crawlers = [crawler_class() for crawler_class in crawler_classes]
         full_crawl = options['full_crawl']
+        test_mode = options['test']
         page = int(options['page'])
         for crawler in crawlers:
-            crawler.crawl(full_crawl=full_crawl,start_page=page)
+            crawler.crawl(full_crawl=full_crawl,start_page=page, test_mode = test_mode)

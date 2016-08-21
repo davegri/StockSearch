@@ -108,7 +108,7 @@ class Crawler():
         return image_page_urls
 
 
-    def crawl(self, start_page=None, full_crawl=True):
+    def crawl(self, start_page=None, full_crawl=True, test_mode=False):
         print("Started Crawler for {}".format(self.domain))
         global interrupted
         interrupted = False
@@ -150,7 +150,10 @@ class Crawler():
                             print(RED.format("Failed to reach image page url at: {} , moving on".format(image_page_url)))
                             self.images_failed+=1
                             continue
-                        self.scrape_image(image_page_soup, image_page_url)
+                        scraped = self.scrape_image(image_page_soup, image_page_url)
+                        if scraped and test_mode:
+                            self.terminate_message()
+                            return
                 else:
                     image_containers = self.get_image_containers(current_page_soup)
                     if not image_containers: raise ImageContainersNotFound
@@ -160,7 +163,10 @@ class Crawler():
                             return
                         print('crawling images on page: {} (image {} of {})'.format(current_page_url, n+1, len(image_containers)))
                         try:
-                            self.scrape_image(container, self.get_image_page_url(container))
+                            scraped = self.scrape_image(container, self.get_image_page_url(container))
+                            if scraped and test_mode:
+                                self.terminate_message()
+                                return
                         except ImageAlreadyExists:
                             if not full_crawl:
                                 self.terminate_message()
@@ -223,7 +229,7 @@ class Crawler():
             return
 
         print('storing image in db')
-        self.store_image(image_source_url, image_page_url, image_thumbnail_url, tags)
+        return self.store_image(image_source_url, image_page_url, image_thumbnail_url, tags)
 
 
 
