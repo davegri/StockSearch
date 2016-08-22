@@ -14,7 +14,7 @@ class Command(BaseCommand):
         deleted = 0
         for i, image in enumerate(images):
             response = requests.get(image.page_url)
-            if 'This is a premium photo' in response.text:
+            if 'This is a Premium Photo' in response.text:
                 image.delete()
                 deleted +=1
                 print('deleted {} photos from tookapic'.format(deleted))
