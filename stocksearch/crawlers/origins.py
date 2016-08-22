@@ -45,4 +45,5 @@ origins = (
         ('SF','Stockified'),                                               
         ('LG','LOOKING GLASS'),                                               
         ('NP','nomad_pictures'),                                               
+        ('AP','AVOPIX'),                                               
 )
