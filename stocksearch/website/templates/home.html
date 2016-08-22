@@ -34,7 +34,7 @@
     <h4 class="tagline"><strong>{{total_image_count|intcomma}}</strong> high quality <a href="https://creativecommons.org/publicdomain/zero/1.0/" target='_blank'>do-what-ever-you-want</a> stock photos, <a href="{% url 'about' %}">learn more</a>.</h2>
     <form action='/search' method="GET" id="search-form">
         <div class="search-box"><input type="text" name="query" placeholder="eg: cute puppies"></div>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F', 'newwindow', 'width=900, height=300'); return false;" class="facebook share" id="facebook-share"></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flibrestock.com%2F', 'newwindow', 'width=900, height=300'); return false;" class="facebook share" id="facebook-share">Share!</a>
         <a href="http://twitter.com/intent/tweet?status=LibreStock+http%3A%2F%2Flibrestock.com%2F" onclick="window.open('http://twitter.com/intent/tweet?text=search%20more%20than%2040%20free%20stock%20photo%20websites%20in%20one%20place!&url=http%3A%2F%2Flibrestock.com%2F&via=libre_stock', 'newwindow', 'width=900, height=300'); return false;" class="twitter share" id="twitter-share">Tweet!</a>
         <button type="button" class="secondary-button filter-button">Filter websites</button>
         <div class="checkboxes">
@@ -85,27 +85,6 @@
 var last_id = "{{ last_id }}";
 </script>
 <script type="text/javascript">
-
-    var f_url = 'http://api.facebook.com/restserver.php?method=links.getStats&urls=http%3A%2F%2Flibrestock.com%2F'
-    $.get(f_url, function(data,status){
-    var share_count = $(data).find('share_count').text();
-    $('#facebook-share').html("("+share_count+") Share!")
-    });
-    var t_url = 'http://urls.api.twitter.com/1/urls/count.json?url=http%3A%2F%2Flibrestock.com%2F'
-    $.ajax({
-        type: 'GET',
-        dataType: 'jsonp',
-        data: {},
-        url: t_url,
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR)
-        },
-        success: function (data) {
-          var tweet_count = data['count'];
-          $('#twitter-share').html("("+tweet_count+") Tweet!")
-        }
-    });
-
 filter_button = $('.filter-button')
 checkboxes = $('.checkboxes')
 
