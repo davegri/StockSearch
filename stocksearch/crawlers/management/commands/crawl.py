@@ -1177,7 +1177,28 @@ class LookingglassCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('ul', class_='post__actions-tags__items')
 
-crawler_classes = [LookingglassCrawler, StockifiedCrawler, PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
+class NomadpicturesCrawler(Crawler):
+    origin = 'NP'
+    base_url = 'https://nomad.pictures/page/{}?s'
+    domain = 'nomad.pictures'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('article', class_='type-post')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('img')['data-lazy-src']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('div', class_='entry-content').find('img')['data-lazy-src']
+
+    def get_tags(self, image_page_soup):
+        tags = image_page_soup.find_all('meta', {'property':'article:tag'})
+        return [tag['content'] for tag in tags]
+
+crawler_classes = [NomadpicturesCrawler, LookingglassCrawler, StockifiedCrawler, PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,
