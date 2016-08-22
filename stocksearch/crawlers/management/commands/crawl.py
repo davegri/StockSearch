@@ -610,16 +610,18 @@ class PicographyCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        return page_soup.find_all('a', class_='overlay')
+        return page_soup.find_all('a', class_='hdt-pic-item')
 
     def get_image_source_url(self, image_page_soup):
         return image_page_soup.find('a', text='Download')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return "http://"+image_page_soup.find('div', class_='photoBox').find('img')['src'][2:]
+        return image_page_soup.find('a', text='Download')['href']
 
-    def get_tags_container(self, image_page_soup):
-        return image_page_soup.find('ul', class_='hd-labels')
+    def get_tags(self, image_page_soup):
+        tags = image_page_soup.find_all('meta', {'property':'article:tag'})
+        tag_names = [tag['content'] for tag in tags if tag['content']!='download']
+        return tag_names
 
 class NegativespaceCrawler(Crawler):
     origin = 'NS'
@@ -629,7 +631,7 @@ class NegativespaceCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find('section', id='products').find_all('div', class_='inner-wrap')
+        containers = page_soup.find_all('li', class_='product-small')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
@@ -716,17 +718,17 @@ class BossfightCrawler(Crawler):
         Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
 
     def get_image_page_links(self, page_soup):
-        containers = page_soup.find_all('li', class_='has-post-thumbnail')
+        containers = page_soup.find_all('div', class_='post')
         return [container.find('a') for container in containers]
 
     def get_image_source_url(self, image_page_soup):
         return image_page_soup.find('a', text='Download Full Resolution Image Here')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('div', id='post-thumbnail').find('img')['src']
+        return image_page_soup.find('a', text='Download Full Resolution Image Here')['href']
 
     def get_tags(self, image_page_soup):
-        tags_string = image_page_soup.find('div', id='post-thumbnail').find('img')['alt']
+        tags_string = image_page_soup.find('h1', class_='entry-title').text
         tag_names = [tag for tag in tags_string.split(', ')]
         return tag_names
 

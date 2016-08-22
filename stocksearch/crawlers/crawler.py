@@ -178,7 +178,8 @@ class Crawler():
 
 
         # run out of pages
-        except (ImageContainersNotFound, ImageURLsNotFound, HTTPError) as exception:
+        except (ImageContainersNotFound, ImageURLsNotFound, HTTPError) as e:
+            print("exception: ", repr(e))
             print("no more pages! terminating crawler for {}".format(self.domain))
             self.terminate_message()
             return
