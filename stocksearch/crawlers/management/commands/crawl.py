@@ -1155,7 +1155,27 @@ class StockifiedCrawler(Crawler):
     def get_tags_container(self, image_page_soup):
         return image_page_soup.find('div', class_='product-tags')
 
-crawler_classes = [StockifiedCrawler, PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
+class LookingglassCrawler(Crawler):
+    origin = 'LG'
+    base_url = 'https://lookingglassfreephotos.tumblr.com/page/{}'
+    domain = 'lookingglassfreephotos.tumblr.com'
+    def __init__(self, db_record=None):
+        Crawler.__init__(self, db_record, self.origin, self.base_url, self.domain)
+
+    def get_image_page_links(self, page_soup):
+        containers = page_soup.find_all('article', class_='post')
+        return [container.find('a') for container in containers]
+
+    def get_image_source_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='post--photo__img')['src']
+
+    def get_image_thumbnail_url(self, image_page_soup):
+        return image_page_soup.find('img', class_='post--photo__img')['src']
+
+    def get_tags_container(self, image_page_soup):
+        return image_page_soup.find('ul', class_='post__actions-tags__items')
+
+crawler_classes = [LookingglassCrawler, StockifiedCrawler, PicallsCrawler, AlanaioCrawler, PicklejarCrawler, MinimographyCrawler, JoshuahibbertCrawler, JeshootsCrawler, IsorepublicCrawler, MystockphotosCrawler, FoodiesfeedCrawler, TravelcoffeebookCrawler, FreestocksCrawler, DesignerpicsCrawler, FreeimagebankCrawler, BucketlistlyCrawler, PublicdomainarchiveCrawler, LifeofpixCrawler,
                    StreetwillCrawler, RealisticshotsCrawler, SplitshireCrawler, PixabaymarkusspiskeCrawler,
                    NegativespaceCrawler, PicographyCrawler, BossfightCrawler,
                    BarnimagesCrawler, FreelyphotosCrawler, BaraartCrawler,

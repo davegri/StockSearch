@@ -43,4 +43,5 @@ origins = (
         ('AI','alana.io'),                                               
         ('PA','picalls'),                                               
         ('SF','Stockified'),                                               
+        ('LG','LOOKING GLASS'),                                               
 )
