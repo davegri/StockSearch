@@ -725,7 +725,7 @@ class BossfightCrawler(Crawler):
         return image_page_soup.find('a', text='Download Full Resolution Image Here')['href']
 
     def get_image_thumbnail_url(self, image_page_soup):
-        return image_page_soup.find('a', text='Download Full Resolution Image Here')['href']
+        return image_page_soup.find('meta', {'property':'og:image'})['content']
 
     def get_tags(self, image_page_soup):
         tags_string = image_page_soup.find('h1', class_='entry-title').text
