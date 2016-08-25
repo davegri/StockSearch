@@ -2,7 +2,7 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 from crawlers.models import Image, Tag, Url, Crawler as CrawlerModel
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, ConnectionError
 import pdb
 import signal
 import sys
@@ -178,7 +178,7 @@ class Crawler():
 
 
         # run out of pages
-        except (ImageContainersNotFound, ImageURLsNotFound, HTTPError) as e:
+        except (ConnectionError, ImageContainersNotFound, ImageURLsNotFound, HTTPError) as e:
             print("exception: ", repr(e))
             print("no more pages! terminating crawler for {}".format(self.domain))
             self.terminate_message()
